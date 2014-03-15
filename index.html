@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+		<title>HTML5 in the Real World</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+
+    <script src="assets/js/jquery-1.9.1.min.js"></script>
+    <style>
+      div.list-frag {
+          margin-top: 0.5em;
+      }
+
+      div.note {
+          text-align: left;
+          font-size: 0.6em;
+          margin-top: 3em;
+      }
+
+      div.footnote {
+          font-size: 0.6em;
+          margin-top: 5em;
+          width: auto;
+      }
+
+      li {list-style-type: disc;}
+
+      body section div img.inline {
+        display: inline;
+        height: 57px;
+        border: none;
+        box-shadow:none;
+        margin: 0px 2px;
+      }
+
+      body section div img.inline.app-icon {
+        height: 80px;
+      }
+
+      em.css-attr {
+        font-style: normal;
+        color: #715EFF;
+      }
+
+      em.html {
+        font-style: normal;
+        color: #FF5E5E;
+      }
+
+      em.striekout {
+        color: #FF5E5E;
+        font-style: normal;
+        text-decoration: line-through;
+      }
+
+      div.left-text {
+        text-align: left;
+      }
+
+      .reveal ul {
+        margin-bottom: 1em;
+      }
+
+      .css-example {
+        position: relative;
+      }
+      .css-example .container {
+        height: 200px;
+        width: 100%;
+        padding: 0px 20px;
+
+      }
+
+      .css-example pre code {
+        max-height: 300px;
+      }
+
+      .superAnim{
+        -webkit-animation-name: superAnim;
+        -webkit-animation-duration: 1.22s;
+        -webkit-animation-delay: 0s;
+        -webkit-animation-fill-mode: both;
+        -webkit-animation-iteration-count: infinite;
+        background: url(/assets/images/HTML5_Badge.png) no-repeat;
+        width:  178px;
+        height: 178px;
+        position:absolute;
+       }
+
+      .superAnim2 {
+        -webkit-animation-delay: 0.25s;
+        right: 20px;
+      }
+
+      @-webkit-keyframes superAnim {
+       0% {
+       -webkit-transform: translate3d(0px, 0px, 0px) scale3d(1.522, 0.322, 1);
+       opacity: 0;
+       -webkit-animation-timing-function:ease;
+       }
+       23.77% {
+       -webkit-transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1);
+       opacity: 1;
+       -webkit-animation-timing-function:ease;
+       }
+       31.97% {
+       -webkit-transform: translate3d(0px, 0px, 0px) scale3d(1.384, 1.384, 1);
+       opacity: 1;
+       -webkit-animation-timing-function:ease;
+       }
+       50% {
+       -webkit-transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1);
+       opacity: 1;
+       -webkit-animation-timing-function:ease-in;
+       }
+       100% {
+       -webkit-transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1);
+       opacity: 0;
+       -webkit-animation-timing-function:ease;
+       }
+      }
+
+      .walking {
+        position: absolute;
+        -webkit-transition: none;
+        -webkit-animation-name: 'walkingMove';
+        -webkit-animation-duration: 3600ms;
+        -webkit-animation-timing-function: linear;
+        -webkit-animation-iteration-count: infinite;
+      }
+      @-webkit-keyframes 'walkingMove' {
+        0% { -webkit-transform: translate3d(560px,0px,0px) scale3d(1,1,1)}
+        45% { -webkit-transform: translate3d(270px,0px,0px) scale3d(1,1,1)}
+        52% { -webkit-transform: translate3d(270px,100px,0px) scale3d(-1,1,1)}
+        96% { -webkit-transform: translate3d(560px,100px,0px) scale3d(-1,1,1)}
+        100% { -webkit-transform: translate3d(560px,0px,0px) scale3d(1,1,1)}
+      }
+
+      .walking2 {
+        -webkit-animation-delay: 1800ms;
+        z-index: 0;
+        -webkit-transform: translate3d(300px, 300px, 0px);
+      }
+      .walking.walking2 > div {
+        background: url('/assets/images/sprite_ref2.png');
+      }
+      .walking > div {
+        background: url('/assets/images/sprite_ref1.png');
+        width: 100px;
+        height: 100px;
+        -webkit-transition: none;
+        -webkit-animation-name: 'walkingStep';
+        -webkit-animation-duration: 600ms;
+        -webkit-animation-timing-function: step-start;
+        -webkit-animation-iteration-count: infinite;
+      }
+
+      @-webkit-keyframes 'walkingStep' {
+        0% { background-position: 0 -100px; }
+        20% { background-position: -100px -100px; }
+        40% { background-position: -200px -100px; }
+        60% { background-position: -300px -100px; }
+        80% { background-position: -400px -100px; }
+        100% { background-position: -500px -100px; }
+      }
+
+      #psU2RY8T6-an-anim {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 250px;
+      }
+
+      .reveal div.contacts {
+        margin-top: 2em;
+        height: 145px;
+      }
+
+      .contacts div {
+        text-align:  left;
+      }
+
+      .contacts .left {
+        float: left;
+      }
+      .contacts .right {
+        float: right;
+      }
+    </style>
+
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+                <section>
+                    <h1>
+                          HTML5 in the Real World
+                    </h1>
+                    Lessons from Five Years of Building HTML5 Games
+
+                    <div class="footnote">
+                      <div style="float: left;margin-left: 60px;">Adam Proctor</div>
+                      <div style="float: right;margin-right: 60px;">Owen Lawson</div>
+                    </div>
+
+                <aside class="notes">
+                    <h2>Who are we?</h2>
+
+
+                <h3 class="speaker">Adam -> Owen</h3>
+                <p>Welcome, has anyone made HTML5 games?<p>
+                <ul>
+                  <li>Adam's history and role at Uken</li>
+                  <li>Owen's history and role at Uken
+                    <ul>
+                      <li>One of the first hires at Uken</li>
+                      <li>Working with Web Apps and Games for the past 6 years</li>
+                    </ul>
+                  </li>
+                </ul>
+              </aside>
+            </section>
+            <section>
+                <h2><img src="/assets/images/uken_logo.png" style="border:none;height:200px;box-shadow:none;"/></h2>
+                <div>
+
+                  <p style="padding-top: 10px;">
+                    <img class="inline app-icon" src="icons/heroes.png" />
+                    <img class="inline app-icon" src="icons/villains.png" />
+                    <img class="inline app-icon" src="icons/forces.png" />
+                    <img class="inline app-icon" src="icons/galaxy.png" />
+                    <img class="inline app-icon" src="icons/legends.png" />
+                    <br/>
+                    <img class="inline app-icon" src="icons/crime.png" />
+                    <img class="inline app-icon" src="icons/streetz.png" />
+                    <img class="inline app-icon" src="icons/mighty.png" />
+                    <img class="inline app-icon" src="icons/bingo.png" />
+                  </p>
+                  <p style="padding: 10px;">
+                    <img src="icons/facebook_square_icon.png" class="inline"/>
+                    <img src="icons/apple.jpeg" class="inline"/>
+                    <img src="icons/android.jpeg" class="inline"/>
+                    <img src="icons/blackberry.jpeg" class="inline"/>
+                    <img src="icons/kongregate.jpeg" class="inline"/>
+                    <img src="icons/amazon.png" class="inline"/>
+                    <img src="icons/windows.png" class="inline"/>
+                  </p>
+                  <p>Toronto's Largest Independent Game Studio</p>
+                </div>
+                <aside class="notes">
+                  <h3 class="speaker">Owen:</h3>
+                  <p>Tell about Uken, why we're here</p>
+                  <ul>
+                    <li>5 years old, grown to around 60 people</li>
+                    <li>Toronto's largest Independant Game Studio</li>
+                    <li>Built on revenue, not venture capital</li>
+                    <li>4 game teams</li>
+                    <li>9 games out, all currently HTML5 based, or will be shortly</li>
+                    <li>7 platforms</li>
+                  </ul>
+               </aside>
+            </section>
+            <section>
+                <h2>HTML5 Now</h2>
+                <div style="display:inline-block;width:45%;vertical-align:top;padding-top:1%;">
+                  <p>Post-mortem on building launching and supporting HTML5 games</p>
+                  <p style="margin-top:8%;">Many top grossing games are using HTML5</p>
+                </div>
+                <div style="display:inline-block;width:45%;">
+                  <p>
+                    <img src="/assets/images/tower_up_cropped.png"/><br/>
+                    <span style="font-size:70%;margin-top:-5%;position:relative;top:-1em;">"agonisingly slow-loading assets"</span><br/>
+                    <em style="font-size:50%;position:relative;top:-2em;">(Edge Magazine review of TowerUp, February 1 2012)</em>
+                  </p>
+                </div>
+                <aside class="notes">
+                    <h3 class="speaker">Owen:</h3>
+                  <ul>
+                    <li>Bit of a post-mortem</li>
+                    <li>Our experiences building, lanuching and supporting HTML5 Games</li>
+                    <li>We'll go through some specific lessons learned, followed by Q &amp; A</li>
+                    <li>Had a lot of success, but also failures (TowerUp) - launched on first gen iPad, then iPhone</li>
+                    <li><p style="margin-bottom: 0in">Others have had succes too, Top Grossing games using HTML5</p>
+
+                    <ul>
+                        <li><p style="margin-bottom: 0in">Rage of Bahamut</p></li>
+                        <li><p style="margin-bottom: 0in">Legends of the Cryptids</p></li>
+                        <li><p style="margin-bottom: 0in">Disney.com - Suite of successful web games designed for mobile</p></li>
+                        <li><p style="margin-bottom: 0in">Most hybrid apps</p></li>
+                    </ul>
+                  </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>Canvas vs DOM</h2>
+                <div class="left-text">
+                    <h3>Canvas</h3>
+                    <ul>
+                        <li>direct control of rendering</li>
+                        <li>slow &amp; inconsistent</li>
+                        <li><em class="striekout">WebGL</em> (not ready for mobile)</li>
+                    </ul>
+                    <h3>DOM</h3>
+                    <ul>
+                        <li>Rapid development &amp; familiar UI</li>
+                        <li>Hardware accellerated CSS3 animations</li>
+                    </ui>
+                </div>
+                <aside class="notes">
+                    <h3 class="speaker">Adam:</h3>
+                    When building HTML games, we start by evaluatating technology.
+                    <br /><br />
+                    There are two main approaches to making games with HTML5.  Canvas or DOM
+                    <br /><br />
+                    Canvas
+                    <ul>
+                      <li>The canvas element came with the promise of direct rendering control
+                      <ul>
+                        <li>This comes with some overhead, canvas graphics libraries are still not that mature</li>
+                        <li>Slow: Large canvas elements can be big performance hogs</li>
+                        <li>Inconsistent: requestAnimFrame isn't supported everywhere, and it's not fully reliable on all platforms.  Just like intervals and timeouts, the literal time passed between frames isn't very reliable (especially on mobile)</li>
+                      </ul></li>
+                      <li>WebGL: isn't supported on the major mobile platforms.  Other than in custom browsers.
+                        <ul>
+                          <li>http://caniuse.com/webgl  (no, basically only reasonable on Chrome or FF)</li>
+                        </ul>
+                      </li>
+                    </ul>
+                    DOM
+                    <ul>
+                        <li>everyone knows HTML, especially artists.</li>
+                        <li>rapid prototyping and development</li>
+                        <li>built in object model</li>
+                        <li>CSS3 animations can be hardware accellerated</li>
+                    </ul>
+
+                    Verdict
+                    <ul>
+                        <li>Our benchmarks have been mixed.</li>
+                        <li>DOM has a higher overhead of creating new elements, but once created can animate more elements without losing performance.  Something like a particle system is possible, but is slow unless you pool elements.</li>
+                        <li>Support for canvas is widespread, but until theres more work on things like WebGL and optimizing rendering</li>
+                        <li>Ultimately we decided to build most of our games using DOM elements, because CSS3 animations and hardware accelleration</li>
+                    </ul>
+                </aside>
+            </section>
+            <section data-background="/assets/images/mm.jpg">
+                <h2>CSS3 Animations</h2>
+
+                <div class="css-example">
+<div class="container">
+  <div class="superAnim"></div>
+  <div class="superAnim superAnim2"></div>
+  <div class="walking"><div></div></div>
+  <div class="walking walking2"><div></div></div>
+</div>
+<pre><code class="css">.walking {
+  -webkit-animation-name: 'walkingMove';
+  -webkit-animation-duration: 3600ms;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes 'walkingMove' {
+  0% { -webkit-transform: translate3d(600px,0px,0px) scale3d(1,1,1)}
+  45% { -webkit-transform: translate3d(300px,0px,0px) scale3d(1,1,1)}
+  52% { -webkit-transform: translate3d(300px,100px,0px) scale3d(-1,1,1)}
+  96% { -webkit-transform: translate3d(600px,100px,0px) scale3d(-1,1,1)}
+  100% { -webkit-transform: translate3d(600px,0px,0px) scale3d(1,1,1)}
+}
+</code></pre>
+</div>
+
+                <aside class="notes">
+                    <h3 class="speaker">Adam:</h3>
+                    <ul>
+                      <li>high level animation (tweening instructions, not painting)</li>
+                      <li>hardware acceleration for CSS3 (iOS+)</li>
+                      <li>smooth, fast (not blocked)</li>
+                      <li>rendering not tied to intervals/timeouts (which are inconsistent)</li>
+                      <li>Sprite animations can be created using step-start transition timing</li>
+                    </ul>
+                </aside>
+            </section>
+            <section id="golem" data-background="black">
+                <iframe id="golemFrame" width="682" height="700" src="craft_v3/index.html" scrolling="no"></iframe>
+                <aside class="notes">
+                    <h3 class="speaker">Adam:</h3>
+                    This was put together by our artists using a program called Sencha Animator.  It gives them a flash-like interface for creating CSS keyframe animations.
+                    <br /><br />
+                    Unlike other frameworks it's not reliant on fat javascript frameworks.<br />
+                    Exports clean CSS.
+                </aside>
+            </section>
+            <section>
+                <h2>Multi-Platform</h2>
+                <ul>
+                  <li><span style="color:green;">Pro:</span> <b>Everything</b> has a browser</li>
+                  <li><span style="color:green;">Pro:</span> Almost all browsers use WebKit</li>
+                  <li><span style="color:red;">Con:</span> Not all WebKits are created equal</li>
+                  <em style="margin-left: 20px; display: inline-block; font-size: 80%;">translate3d on iOS = hardware acceleration<br/>translate3d on Android 2.x = broken keyboard</em>
+                </ul>
+
+                <aside class="notes">
+                    <h3 class="speaker">Owen:</h3>
+                    <h4>LESSON: Multi-platform is easier, but not simple</h4>
+                    <p>Great thing, everything has a browser, generally WebKit (not always equal)</p>
+                    <p>HTML5 allows for much easier multi-platorm support (first 90%)</p>
+                    <p>CSS property translate 3d</p>
+                    <p>Other odd bugs: BB10 - Most compliant HMTL5 browser when launched, drop downs didn't work!</p>
+                    <p>Also: not only different performance, but degrade performance differently</p>
+                </aside>
+            </section>
+            <section>
+                <h2>Platform Fragmentation</h2>
+                <table>
+                  <tr>
+                    <td style="text-align:center;"><img src="/assets/images/ios_chart.png" style="width:50%;border:1px solid black;"></td>
+                    <td><img src="/assets/images/android_chart.png" style="width:100%;border:1px solid black;background-color: white;"></td>
+                </table>
+                <div class="foot-note"><span style="vertical-align: top;">Sources:</span>
+                  <span style="display:inline-block;certical-align:top;text-align:left;">
+                    <a href="https://developer.apple.com/devcenter/ios/checklist/">Apple - iOS Developer Center</a><br/>
+                    <a href="http://developer.android.com/about/dashboards/index.html">Google - Developer Dashboard</a><br/>
+                  </span>
+                </div>
+                <aside class="notes">
+                    <h3 class="speaker">Owen:</h3>
+                    <p>Charts form Apple and Google, so take with a grain of salt<br/>
+                      -if any of you have tried developing for Android, this graph probably doesn't look quite right.</p>
+                    <p>Represents only 2 platforms</p>
+                    <p>The horror of BlackBerry</p>
+                    <p>Even so, still many different targets with very different browser experiences <b>(next slide)</b></p>
+                </aside>
+            </section>
+            <section>
+                <h2>Platform Fragmentation</h2>
+                <table style="margin-left:13%;">
+                  <tr>
+                    <td width="50%">
+                      <h3>iOS</h3>
+                      <ul>
+                        <li>3 form factors</li>
+                        <li>5 resolutions</li>
+                      </ul>
+                    </td>
+                    <td width="50%">
+                      <h3>Android</h3>
+                      <ul>
+                        <li><b>Many</b> form factors</li>
+                        <li><b>Many</b> resolutions</li>
+                        <li>Phone specific tweaks</li>
+                      </ul>
+                    </td>
+                  </tr>
+                </table>
+                <aside class="notes">
+                    <h3 class="speaker">Owen:</h3>
+                    <p>Take a closer look at main two platforms, still have...</p>
+                    <p>Not exclusive to HTML5, but HTML5 isn't a magic bullet either</p>
+                    <p>Some HTML5 specific things
+                      <ul>
+                        <li>Need *some* responsive design, OR scrolling (scalling often not handled well)</li>
+                        <li>CSS Authoring framework is <em>very</em> userfull (Compass)</li>
+                      </ul>
+                    </p>
+                </aside>
+            </section>
+            <section>
+                <h2>Image Preloading</h2>
+                <div style="text-align: left;">
+                    <h3>Problems:</h3>
+                    <ul>
+                        <li>
+                            <img src="assets/preloading/progscan.gif" style="float: right; margin: 0;" />
+                            Browsers load images with progressive image rendering
+                        </li>
+                        <div class="list-frag">
+                            <li>Mobile Caching isn't very good</li>
+                        </div>
+                        <div class="list-frag">
+                            <li>Sometimes browsers refuse to load images</li>
+                        </div>
+                    </ul>
+                </div>
+                <aside class="notes">
+                    <h3 class="speaker">Adam:</h3>
+                    Slow
+                    <ul>
+                      <li>dependant on remote assets</li>
+                      <li>slow to render</li>
+                    </ul>
+                    <ul>
+                        <li>Problem with DOM applications</li>
+                        <li>Mostly images, but page rendering can also be a factor with multi-part page rendering</li>
+                    </ul>
+                    <ul>
+                        <li>Network time is the biggest delay. Especially over mobile networks, preloading is essential.</li>
+                        <li>Application Cache limited to 10mb</li>
+                        <li>iOS doesn't support link prefetching</li>
+                    </ul>
+
+                    <ul>
+                        <li>iOS won’t render offscreen or "display: none;" images</li>
+                        <li>&lt;img&gt; tags will not be loaded, even if they’re visible, if the device is low on memory</li>
+                        <li>large images loaded in 1024x1024 chunks on iOS</li>
+                    </ul>
+
+
+                    http://www.codinghorror.com/blog/2005/12/progressive-image-rendering.html  - Jeff Atwood
+                    http://grinninggecko.com/developing-cross-platform-html5-offline-app-1/  (appcache limits)
+                </aside>
+            </section>
+            <section>
+                <h2>Image Preloading</h2>
+                <div style="text-align: left;">
+                    <h3>Solutions:</h3>
+                    <ul>
+                        <li>Write your own cache in the native client</li>
+                        <li>Use <em class="css-attr">background-image</em> not <em class="html">&lt;img&gt;</em></li>
+                        <li>Preload in a “visible”
+                        container, that has a low z-index</li>
+                    </ul>
+                    <pre><code class="css">
+  #preload {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      height: 1px;
+      width: 1px;
+      z-index: 0;
+  }
+
+</code></pre>
+
+                    <div class="note">
+                        Warning: background-image bypasses built in memmory limits on UIWebview.
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h3 class="speaker">Adam:</h3>
+                    <ul>
+                        <li>A custom native client can cache images, and you can ship important images with your build</li>
+                        <li>Don't show the page until window.onload is fired.   Or use the iOS webViewDidFinishLoad() method.  Every browser is a bit different.</li>
+                    </ul>
+
+
+                    http://www.codinghorror.com/blog/2005/12/progressive-image-rendering.html  - Jeff Atwood
+                    http://grinninggecko.com/developing-cross-platform-html5-offline-app-1/  (prefetch limits)
+                </aside>
+            </section>
+            <section>
+                <h2>Cheating</h2>
+                <p>Editing a browser page is easy</p>
+                <p>Automating a browser page is easy</p>
+                <p>All communication and front end code is compromised</p>
+
+                <aside class="notes">
+                    <h3 class="speaker">Owen:</h3>
+                    <p style="margin-bottom: 0in">Suite of tools for editing in the browser</p>
+                    <p style="margin-bottom: 0in">Your game can be automated using out of the box testing software</p>
+                    <p style="margin-bottom: 0in">Harder on mobile, bigger target on the web</p>
+                    <p style="margin-bottom: 0in">Can severly damage a competitive multiplayer community</p>
+                </aside>
+            </section>
+            <section>
+                <h2>Web Automation</h2>
+                <pre><code class="ruby">def check_request(user, controller, action)
+  ask_for_confirmation = false
+  req_check = AutoClicker.find_or_create_by_user_id_and_target(user.id,
+  "#{controller}:#{action}")
+
+  if(req_check.updated_at > MAX_TIME_BETWEEN_REQUESTS.seconds.ago)
+    req_check.increment(:request_count)
+  else
+    req_check.request_count = 1
+  end
+
+  if(req_check.request_count > MAX_FREQUEST_REQUESTS)
+    ask_for_confirmation = true
+  end
+
+  return ask_for_confirmation
+end</code></pre>
+
+                <aside class="notes">
+                    <h3 class="speaker">Owen:</h3>
+                    <p>Example of Auto Click Detection</p>
+                    <p>Approach: too many <em>regular</em> actions for a human, pop up modal dialog asking confirmation</p>
+                    <p>Problems:
+                      <ul>
+                        <li>too many false positives</li>
+                        <li>too disruptive to normal players</li>
+                        <li>too easy to get around</li>
+                        <li>tried captcha approach, more disruptive</li>
+                      </ul>
+                    </p>
+                </aside>
+            </section>
+            <section>
+                <h2>Data Analysis</h2>
+                <img src="/assets/images/cheater.png"/>
+
+                <aside class="notes">
+                    <h3 class="speaker">Owen:</h3>
+                    <p>Example of Data Analysis</p>
+                    <p>Approach: find patterns in request</p>
+                    <p>best, but hard to automate (one type of traditional cheat detection)</p>
+                </aside>
+            </section>
+            <section>
+                <h2>Race Conditions</h2>
+                <pre><code class="ruby">
+def acquire_lock(key, value, options = {})
+  error = options[:error_msg] || nil
+
+  stored_key = Rails.cache.write(key, value, :expires_in => expiry,
+                                   :unless_exist => true)
+  flash[:error] = error if !stored_key && error.present?
+
+  return stored_key
+end
+                </code></pre>
+
+                <aside class="notes">
+                    <h3 class="speaker">Owen:</h3>
+                    <p>Example of Acquire Lock</p>
+                    <p>Problem: race conditions issue with multiple server threads processing simultaneously</p>
+                    <p>Can code around, but can be tough if not planned from the start (legacy games)</p>
+                    <p>Approach: Basic semaphor, using <em>fast</em> cache</p>
+                </aside>
+            </section>
+            <section>
+                <h2>Updates are Fast</h2>
+                <div>
+                  Average iOS review period: 1 week
+                  <br>
+                </div>
+                <svg width="670" height="500" style="overflow: hidden;"><defs id="defs"><clipPath id="_ABSTRACT_RENDERER_ID_0"><rect x="40" y="20" width="630" height="400"></rect></clipPath></defs><g><rect x="40" y="20" width="630" height="400" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g clip-path="url(#_ABSTRACT_RENDERER_ID_0)"><g><rect x="102" y="20" width="1" height="400" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="262" y="20" width="1" height="400" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="417" y="20" width="1" height="400" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="574" y="20" width="1" height="400" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="40" y="419" width="630" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="40" y="319" width="630" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="40" y="220" width="630" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="40" y="120" width="630" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="40" y="20" width="630" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect></g><g><rect x="40" y="20" width="1" height="400" stroke="none" stroke-width="0" fill="#333333"></rect><rect x="40" y="419" width="630" height="1" stroke="none" stroke-width="0" fill="#333333"></rect></g><g><path d="M669.5,286.23400000000004L667.771978021978,283.84000000000003L666.043956043956,279.451L664.315934065934,279.052L662.5879120879121,277.456L660.8598901098901,275.062L659.1318681318681,271.072L657.4038461538462,264.688L655.6758241758241,258.703L653.9478021978022,246.334L652.2197802197802,238.753L650.4917582417582,235.96L648.7637362637363,233.167L647.0357142857142,231.571L645.3076923076923,230.374L643.5796703296703,223.192L641.8516483516484,216.40900000000002L640.1236263736264,211.621L638.3956043956043,208.429L636.6675824175824,206.43400000000003L634.9395604395604,204.04L633.2115384615385,202.045L631.4835164835165,194.863L629.7554945054945,190.07500000000002L628.0274725274725,181.29700000000003L626.2994505494505,174.11499999999998L624.5714285714286,166.933L622.8434065934066,164.53900000000002L621.1153846153846,162.14499999999998L619.3873626373626,157.35699999999997L617.6593406593406,150.973L615.9313186813187,150.973L614.2032967032967,149.377L612.4752747252747,150.175L610.7472527472527,150.973L609.0192307692307,153.36700000000002L607.2912087912088,151.77100000000002L605.5631868131868,151.372L603.8351648351648,154.16500000000002L602.1071428571429,160.15000000000003L600.3791208791208,162.54399999999998L598.6510989010989,164.93800000000002L596.9230769230769,166.933L595.195054945055,166.933L593.467032967033,166.13500000000002L591.7390109890109,167.73100000000002L590.010989010989,171.32200000000003L588.282967032967,172.519L586.554945054945,174.11499999999998L584.8269230769231,178.10500000000002L583.0989010989011,179.70100000000002L581.3708791208791,180.499L579.6428571428571,180.10000000000002L577.9148351648352,180.499L576.1868131868132,183.691L574.4587912087912,187.282L572.7307692307692,188.479L571.0027472527472,190.474L569.2747252747253,190.873L567.5467032967033,193.26700000000002L565.8186813186813,195.661L564.0906593406593,199.25200000000004L562.3626373626373,204.43900000000002L560.6346153846154,209.22700000000003L558.9065934065934,210.424L557.1785714285714,211.621L555.4505494505495,213.616L553.7225274725274,218.00500000000002L551.9945054945055,222.394L550.2664835164835,225.58599999999998L548.5384615384615,229.17700000000002L546.8104395604396,232.369L545.0824175824175,231.17200000000003L543.3543956043956,231.97L541.6263736263736,233.965L539.8983516483516,235.162L538.1703296703297,239.15200000000002L536.4423076923076,242.74300000000002L534.7142857142858,243.142L532.9862637362637,242.344L531.2582417582418,242.344L529.5302197802198,243.541L527.8021978021977,245.137L526.0741758241759,243.94L524.3461538461538,242.344L522.6181318681319,241.54600000000002L520.8901098901099,238.354L519.1620879120878,237.556L517.434065934066,237.15699999999998L515.7060439560439,235.162L513.978021978022,232.76800000000003L512.25,231.17200000000003L510.521978021978,226.78300000000002L508.79395604395603,221.596L507.0659340659341,219.20200000000003L505.33791208791206,217.207L503.6098901098901,216.01000000000002L501.8818681318681,212.818L500.15384615384613,209.626L498.4258241758242,204.83800000000002L496.69780219780216,199.651L494.9697802197802,196.459L493.24175824175825,195.661L491.51373626373623,194.863L489.7857142857143,195.661L488.0576923076923,196.858L486.3296703296703,189.67600000000002L484.60164835164835,185.287L482.87362637362634,183.292L481.1456043956044,182.095L479.4175824175824,180.499L477.6895604395604,180.898L475.96153846153845,179.70100000000002L474.2335164835165,177.70600000000002L472.5054945054945,174.11499999999998L470.7774725274725,172.918L469.0494505494505,172.918L467.32142857142856,173.317L465.5934065934066,174.11499999999998L463.8653846153846,175.312L462.1373626373626,174.514L460.40934065934067,173.317L458.68131868131866,172.918L456.9532967032967,172.918L455.2252747252747,173.716L453.49725274725273,174.514L451.7692307692308,174.913L450.04120879120876,174.514L448.3131868131868,172.918L446.58516483516485,171.32200000000003L444.85714285714283,172.519L443.1291208791209,172.918L441.40109890109886,171.721L439.6730769230769,174.11499999999998L437.94505494505495,174.11499999999998L436.21703296703294,171.721L434.489010989011,172.918L432.760989010989,172.918L431.032967032967,174.514L429.30494505494505,175.312L427.57692307692304,176.11L425.8489010989011,176.90800000000002L424.1208791208791,176.90800000000002L422.3928571428571,177.70600000000002L420.66483516483515,178.903L418.9368131868132,180.898L417.2087912087912,184.48900000000003L415.4807692307692,185.287L413.7527472527472,185.686L412.02472527472526,184.888L410.2967032967033,186.883L408.5686813186813,188.08L406.84065934065933,190.474L405.1126373626374,190.873L403.38461538461536,191.67100000000002L401.6565934065934,190.07500000000002L399.92857142857144,188.878L398.20054945054943,188.08L396.4725274725275,189.67600000000002L394.74450549450546,190.07500000000002L393.0164835164835,190.07500000000002L391.28846153846155,187.681L389.56043956043953,186.484L387.8324175824176,182.095L386.1043956043956,180.10000000000002L384.3763736263736,180.10000000000002L382.64835164835165,180.499L380.92032967032964,181.29700000000003L379.1923076923077,181.29700000000003L377.4642857142857,181.696L375.7362637362637,180.499L374.00824175824175,178.903L372.2802197802198,179.70100000000002L370.5521978021978,180.898L368.8241758241758,183.292L367.0961538461538,182.89300000000003L365.36813186813185,180.499L363.6401098901099,179.30200000000002L361.9120879120879,178.903L360.1840659340659,178.50400000000002L358.45604395604397,178.10500000000002L356.72802197802196,177.70600000000002L355,177.70600000000002L353.271978021978,176.90800000000002L351.54395604395603,176.11L349.8159340659341,177.70600000000002L348.08791208791206,178.903L346.3598901098901,180.499L344.63186813186815,182.095L342.90384615384613,185.287L341.1758241758242,186.08500000000004L339.44780219780216,189.67600000000002L337.7197802197802,192.07L335.99175824175825,195.661L334.26373626373623,199.25200000000004L332.5357142857143,201.247L330.8076923076923,201.247L329.0796703296703,202.045L327.35164835164835,201.247L325.62362637362634,198.454L323.8956043956044,199.651L322.1675824175824,197.257L320.4395604395604,194.065L318.71153846153845,191.67100000000002L316.9835164835165,188.878L315.2554945054945,188.479L313.5274725274725,187.282L311.79945054945057,187.282L310.07142857142856,187.282L308.3434065934066,188.08L306.6153846153846,186.484L304.8873626373626,186.484L303.15934065934067,184.48900000000003L301.43131868131866,184.888L299.7032967032967,185.686L297.97527472527474,187.681L296.24725274725273,190.873L294.5192307692308,192.86800000000002L292.79120879120876,192.07L291.0631868131868,191.27200000000002L289.33516483516485,193.26700000000002L287.6071428571429,193.666L285.8791208791209,196.459L284.15109890109886,201.247L282.4230769230769,200.449L280.69505494505495,199.25200000000004L278.967032967033,198.454L277.239010989011,198.454L275.51098901098896,198.853L273.782967032967,202.045L272.05494505494505,201.64600000000002L270.3269230769231,204.43900000000002L268.5989010989011,206.43400000000003L266.8708791208791,205.636L265.1428571428571,204.04L263.41483516483515,203.641L261.6868131868132,203.24200000000002L259.95879120879124,201.64600000000002L258.2307692307692,199.25200000000004L256.5027472527472,197.65600000000003L254.77472527472526,194.065L253.0467032967033,191.67100000000002L251.3186813186813,190.07500000000002L249.59065934065933,189.67600000000002L247.86263736263734,189.67600000000002L246.1346153846154,188.479L244.4065934065934,186.883L242.67857142857142,185.686L240.95054945054943,184.48900000000003L239.22252747252747,182.095L237.4945054945055,180.898L235.7664835164835,180.10000000000002L234.03846153846152,176.90800000000002L232.31043956043956,171.721L230.58241758241758,168.529L228.8543956043956,164.93800000000002L227.1263736263736,162.94300000000004L225.39835164835165,160.94799999999998L223.67032967032966,157.75600000000003L221.94230769230768,154.56400000000002L220.21428571428572,150.973L218.48626373626374,146.983L216.75824175824175,143.392L215.03021978021977,141.796L213.3021978021978,139.40200000000004L211.57417582417582,137.40699999999998L209.84615384615384,136.60900000000004L208.11813186813185,133.81600000000003L206.3901098901099,131.02299999999997L204.6620879120879,129.02800000000002L202.93406593406593,128.23000000000002L201.20604395604394,126.63400000000001L199.47802197802199,123.44200000000001L197.75,119.053L196.02197802197801,115.46199999999999L194.29395604395603,111.47200000000004L192.56593406593407,105.88600000000002L190.8379120879121,101.89600000000002L189.1098901098901,99.10300000000001L187.38186813186812,97.507L185.65384615384616,95.51200000000006L183.92582417582418,91.12299999999999L182.1978021978022,86.33500000000004L180.4697802197802,81.94599999999997L178.74175824175825,79.15300000000002L177.01373626373626,77.15800000000002L175.28571428571428,76.75900000000001L173.5576923076923,75.16299999999995L171.82967032967034,72.37000000000006L170.10164835164835,70.774L168.37362637362637,69.57700000000006L166.64560439560438,67.981L164.91758241758242,67.981L163.18956043956044,68.38L161.46153846153845,69.976L159.7335164835165,69.57700000000006L158.00549450549448,70.375L156.27747252747253,71.173L154.54945054945054,71.971L152.82142857142856,71.971L151.0934065934066,73.56700000000001L149.3653846153846,77.95600000000002L147.63736263736263,85.13799999999998L145.90934065934067,87.53199999999998L144.18131868131866,92.71900000000005L142.4532967032967,97.108L140.72527472527472,99.10300000000001L138.99725274725273,104.29000000000002L137.26923076923077,109.87600000000003L135.5412087912088,115.06299999999999L133.8131868131868,115.46199999999999L132.08516483516485,116.26000000000005L130.35714285714286,120.25L128.62912087912088,124.24000000000001L126.9010989010989,126.23500000000001L125.17307692307692,125.83600000000001L123.44505494505495,128.62900000000002L121.71703296703296,131.02299999999997L119.98901098901099,134.61400000000003L118.26098901098901,140.2L116.53296703296704,142.594L114.80494505494505,140.2L113.07692307692308,135.81099999999998L111.3489010989011,131.02299999999997L109.62087912087912,127.03300000000002L107.89285714285714,124.63900000000001L106.16483516483517,122.644L104.43681318681318,120.25L102.70879120879121,115.46199999999999L100.98076923076923,111.07299999999998L99.25274725274724,107.48200000000003L97.52472527472527,101.89600000000002L95.7967032967033,91.92099999999999L94.06868131868131,90.32499999999999L92.34065934065933,85.13799999999998L90.61263736263736,82.34500000000003L88.88461538461539,81.54699999999997L87.1565934065934,73.96600000000001L85.42857142857143,65.18799999999999L83.70054945054946,58.00599999999997L81.97252747252747,54.01600000000002L80.24450549450549,52.420000000000016L78.51648351648352,52.420000000000016L76.78846153846155,50.42500000000001L75.06043956043956,49.62700000000001L73.33241758241758,48.031000000000006L71.6043956043956,45.238L69.87637362637362,43.641999999999996L68.14835164835165,42.44500000000005L66.42032967032966,40.84899999999999L64.6923076923077,36.061000000000035L62.964285714285715,31.67199999999997L61.23626373626374,30.874000000000024L59.50824175824176,32.07099999999997L57.78021978021978,33.26800000000003L56.0521978021978,36.85900000000004L54.324175824175825,39.25300000000004L52.59615384615385,41.24799999999999L50.86813186813187,42.84400000000005L49.14010989010989,44.44L47.41208791208791,44.44L45.684065934065934,45.238L43.956043956043956,46.03600000000006L42.22802197802198,44.44L40.5,42.44500000000005" stroke="#223344" stroke-width="2" fill-opacity="1" fill="none"></path></g></g><g></g><g><g><text text-anchor="middle" x="102.99679487179486" y="439.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">Oct 2012</text></g><g><text text-anchor="middle" x="262.04681776556777" y="439.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">Jan 2013</text></g><g><text text-anchor="middle" x="417.49679487179486" y="439.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">Apr 2013</text></g><g><text text-anchor="middle" x="574.7467948717948" y="439.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">Jul 2013</text></g><g><text text-anchor="end" x="32.5" y="424.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">0.0</text></g><g><text text-anchor="end" x="32.5" y="324.3" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">2.5</text></g><g><text text-anchor="end" x="32.5" y="224.55" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">5.0</text></g><g><text text-anchor="end" x="32.5" y="124.8" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">7.5</text></g><g><text text-anchor="end" x="32.5" y="25.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">10.0</text></g></g></g><g></g></svg>
+                <div class="foot-note">Source: <a href="http://reviewtimes.shinydevelopment.com/">http://reviewtimes.shinydevelopment.com</a></div>
+                <aside class="notes">
+                    <h3 class="speaker">Adam:</h3>
+
+                    Rapid development and Deployment
+                    <ul>
+                      <li>Long review times<ul>
+                        <li>Average iOS review period: 1 week</li>
+                        <li>Average Google Play release period: a few hours</li>
+                        <li>Average BlackBerry review time: a couple days</li>
+                        <li>Average Amazon review period: weeks (2 weeks for our last update)</li>
+                        <li>Time to deploy HTML updates: <b>minutes</b></li>
+                      </ul></li>
+                      <li>Apple is getting better, 3 days</li>
+                      <li>Need an update for certain things like screenshot or icon changes anyways</li>
+                      <li>Users think all changes = app updates
+                        <ul><li>patch notes get weird</li></ul>
+                      </li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+              <h2>Room to grow</h2>
+              <p>Still need a native client for:</p>
+              <ul>
+                <li>Sound</li>
+                <li>Payments</li>
+                <li>Sockets</li>
+                <li>Sensors / Accelerometer</li>
+                <li>Push Notifications</li>
+                <li>Distribution</li>
+              </ul>
+              <aside class="notes">
+                <h3 class="speaker">Adam:</h3>
+                <ul>
+                  <li>Sound is getting better, but until everyone has web audio api, it's a terrible hack. (Audio Sprite-sheeting)</li>
+                  <li>Payments: There's PayPal, but it's getting forced out</li>
+                  <li>Sockets: Android <b>still</b> doesn't have WebSocket support!</li>
+                  <li>Sensors: Some platforms provide <em>some</em> access, but inconsistent, limited and often requires in browser permissions</li>
+                  <li>End note: None of your customers care that it’s HTML5
+                    <ul>
+                        <li>Games are judged at face value</li>
+                        <li>make sure the game is fast and responsive</li></ul>
+                  </li>
+                </ul>
+              </aside>
+            </section>
+            <section>
+                <h2>Thank you</h2>
+                <div>Questions?</div>
+                <div>
+                    <br>
+                </div>
+                <div class="contacts">
+                  <div class="right">
+                    Owen Lawson<br />
+                    <a href="mailto:owen@uken.com?Subject=PAX%20Talk" class="roll">owen@uken.com</a><br />
+                    @OwenCPL</div>
+                  <div class="left">
+                    Adam Proctor<br />
+                    <a href="mailto:adam@uken.com?Subject=PAX%20Talk" class="roll">adam@uken.com</a><br />
+                    @aproctor</div>
+                </div>
+                <div class="footnote" style="margin-top: 3em;"><a href="http://s.uken.com/paxdev">http://s.uken.com/paxdev</a></div>
+            </section>
+      </div>
+
+
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'concave', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+          // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+          // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+
+
+    </script>
+
+
+
+  </body>
+</html>
