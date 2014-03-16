@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
 
-		<title>HTML5 in the Real World</title>
+		<title>Lessons Learned from Five Years of Building HTML5 Games</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -97,7 +97,7 @@
       }
 
       .css-example pre code {
-        max-height: 300px;
+        max-height: 450px;
       }
 
       .superAnim{
@@ -147,22 +147,24 @@
 
       .walking {
         position: absolute;
+        -webkit-transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
         -webkit-transition: none;
         -webkit-animation-name: 'walkingMove';
-        -webkit-animation-duration: 3600ms;
+        -webkit-animation-duration: 8000ms;
         -webkit-animation-timing-function: linear;
         -webkit-animation-iteration-count: infinite;
       }
       @-webkit-keyframes 'walkingMove' {
-        0% { -webkit-transform: translate3d(560px,0px,0px) scale3d(1,1,1)}
-        45% { -webkit-transform: translate3d(270px,0px,0px) scale3d(1,1,1)}
-        52% { -webkit-transform: translate3d(270px,100px,0px) scale3d(-1,1,1)}
-        96% { -webkit-transform: translate3d(560px,100px,0px) scale3d(-1,1,1)}
-        100% { -webkit-transform: translate3d(560px,0px,0px) scale3d(1,1,1)}
+        0% { -webkit-transform: translate3d(800%,0px,0px) scale3d(1,1,1)}
+        45% { -webkit-transform: translate3d(0%,0px,0px) scale3d(1,1,1)}
+        52% { -webkit-transform: translate3d(0%,100px,0px) scale3d(-1,1,1)}
+        96% { -webkit-transform: translate3d(800%,100px,0px) scale3d(-1,1,1)}
+        100% { -webkit-transform: translate3d(800%,0px,0px) scale3d(1,1,1)}
       }
 
       .walking2 {
-        -webkit-animation-delay: 1800ms;
+        -webkit-animation-delay: 4000ms;
         z-index: 0;
         -webkit-transform: translate3d(300px, 300px, 0px);
       }
@@ -222,13 +224,10 @@
       <!-- Any section element inside of this container is displayed as a slide -->
       <div class="slides">
                 <section>
-                    <h1>
-                          HTML5 in the Real World
-                    </h1>
-                    Lessons from Five Years of Building HTML5 Games
-
+                    <h2>
+                          Lessons Learned from Five Years of Building HTML5 Games
+                    </h2>
                     <div class="footnote">
-                      <div style="float: left;margin-left: 60px;">Adam Proctor</div>
                       <div style="float: right;margin-right: 60px;">Owen Lawson</div>
                     </div>
 
@@ -236,10 +235,9 @@
                     <h2>Who are we?</h2>
 
 
-                <h3 class="speaker">Adam -> Owen</h3>
+                <h3 class="speaker">Owen</h3>
                 <p>Welcome, has anyone made HTML5 games?<p>
                 <ul>
-                  <li>Adam's history and role at Uken</li>
                   <li>Owen's history and role at Uken
                     <ul>
                       <li>One of the first hires at Uken</li>
@@ -270,14 +268,14 @@
                     <img src="icons/apple.jpeg" class="inline"/>
                     <img src="icons/android.jpeg" class="inline"/>
                     <img src="icons/blackberry.jpeg" class="inline"/>
-                    <img src="icons/kongregate.jpeg" class="inline"/>
+                    <img src="icons/kik_flat.png" class="inline"/>
                     <img src="icons/amazon.png" class="inline"/>
                     <img src="icons/windows.png" class="inline"/>
                   </p>
                   <p>Toronto's Largest Independent Game Studio</p>
                 </div>
                 <aside class="notes">
-                  <h3 class="speaker">Owen:</h3>
+
                   <p>Tell about Uken, why we're here</p>
                   <ul>
                     <li>5 years old, grown to around 60 people</li>
@@ -289,6 +287,20 @@
                   </ul>
                </aside>
             </section>
+            <section>
+              <h2>So you want to make a game?</h2>
+                <p class='fragment'>What platform will you build for?</p>
+                <p class='fragment'>How will you package your game?</p>
+
+              <aside class="notes">
+                <p>iOS and Android fastest growing games market<br />
+                  - 2.9X growth in 2013</p>
+                <p>Pure web or hybrid app?<br />
+                  - Hybrid offers better distribution and access to payments, push notifications, more sensors</p>
+                <p>these are the decisions we went with, and what I'll be focusing on, however the lessons should apply more broadly as well</p>
+              </aside>
+            </section>
+            <!--
             <section>
                 <h2>HTML5 Now</h2>
                 <div style="display:inline-block;width:45%;vertical-align:top;padding-top:1%;">
@@ -303,7 +315,7 @@
                   </p>
                 </div>
                 <aside class="notes">
-                    <h3 class="speaker">Owen:</h3>
+
                   <ul>
                     <li>Bit of a post-mortem</li>
                     <li>Our experiences building, lanuching and supporting HTML5 Games</li>
@@ -320,6 +332,7 @@
                   </ul>
                 </aside>
             </section>
+            -->
             <section>
                 <h2>Canvas vs DOM</h2>
                 <div class="left-text">
@@ -336,18 +349,15 @@
                     </ui>
                 </div>
                 <aside class="notes">
-                    <h3 class="speaker">Adam:</h3>
-                    When building HTML games, we start by evaluatating technology.
-                    <br /><br />
-                    There are two main approaches to making games with HTML5.  Canvas or DOM
-                    <br /><br />
+                    Next choice, Canvas vs DOM
+                    <br />
                     Canvas
                     <ul>
                       <li>The canvas element came with the promise of direct rendering control
                       <ul>
-                        <li>This comes with some overhead, canvas graphics libraries are still not that mature</li>
-                        <li>Slow: Large canvas elements can be big performance hogs</li>
-                        <li>Inconsistent: requestAnimFrame isn't supported everywhere, and it's not fully reliable on all platforms.  Just like intervals and timeouts, the literal time passed between frames isn't very reliable (especially on mobile)</li>
+                        <li>canvas graphics libraries are still not that mature when it comes to more advanced techniques like double buffering and dirty rectangles</li>
+                        <li>Slow: Large canvas elements can be big performance hogs when trying to maintain a high framerate, especially on mobile (larger screen resolutions are not helping)</li>
+                        <li>Inconsistent: requestAnimationFrame isn't supported everywhere (iOS 6+, Android 4.4+), and it's not fully reliable on all platforms.  Just like intervals and timeouts, the literal time passed between frames isn't very reliable (especially on mobile)</li>
                       </ul></li>
                       <li>WebGL: isn't supported on the major mobile platforms.  Other than in custom browsers.
                         <ul>
@@ -377,43 +387,45 @@
 
                 <div class="css-example">
 <div class="container">
-  <div class="superAnim"></div>
-  <div class="superAnim superAnim2"></div>
+  <!-- <div class="superAnim"></div> -->
+  <!-- <div class="superAnim superAnim2"></div> -->
   <div class="walking"><div></div></div>
   <div class="walking walking2"><div></div></div>
 </div>
 <pre><code class="css">.walking {
+  -webkit-backface-visibility: hidden;
   -webkit-animation-name: 'walkingMove';
-  -webkit-animation-duration: 3600ms;
+  -webkit-animation-duration: 4800ms;
   -webkit-animation-timing-function: linear;
   -webkit-animation-iteration-count: infinite;
 }
 
 @-webkit-keyframes 'walkingMove' {
-  0% { -webkit-transform: translate3d(600px,0px,0px) scale3d(1,1,1)}
-  45% { -webkit-transform: translate3d(300px,0px,0px) scale3d(1,1,1)}
-  52% { -webkit-transform: translate3d(300px,100px,0px) scale3d(-1,1,1)}
-  96% { -webkit-transform: translate3d(600px,100px,0px) scale3d(-1,1,1)}
-  100% { -webkit-transform: translate3d(600px,0px,0px) scale3d(1,1,1)}
+  0% { -webkit-transform: translate3d(660px,0px,0px) scale3d(1,1,1)}
+  45% { -webkit-transform: translate3d(170px,0px,0px) scale3d(1,1,1)}
+  52% { -webkit-transform: translate3d(170px,100px,0px) scale3d(-1,1,1)}
+  96% { -webkit-transform: translate3d(660px,100px,0px) scale3d(-1,1,1)}
+  100% { -webkit-transform: translate3d(660px,0px,0px) scale3d(1,1,1)}
 }
 </code></pre>
 </div>
 
                 <aside class="notes">
-                    <h3 class="speaker">Adam:</h3>
+
                     <ul>
                       <li>high level animation (tweening instructions, not painting)</li>
-                      <li>hardware acceleration for CSS3 (iOS+)</li>
+                      <li>hardware acceleration for CSS3 (most iOS, Android 3.0+)</li>
                       <li>smooth, fast (not blocked)</li>
                       <li>rendering not tied to intervals/timeouts (which are inconsistent)</li>
                       <li>Sprite animations can be created using step-start transition timing</li>
+                      <li><strong>NOTE</strong> Hardware acceleration can be turned off, and performance generally degraded, as battery levels drop</li>
                     </ul>
                 </aside>
             </section>
             <section id="golem" data-background="black">
                 <iframe id="golemFrame" width="682" height="700" src="craft_v3/index.html" scrolling="no"></iframe>
                 <aside class="notes">
-                    <h3 class="speaker">Adam:</h3>
+
                     This was put together by our artists using a program called Sencha Animator.  It gives them a flash-like interface for creating CSS keyframe animations.
                     <br /><br />
                     Unlike other frameworks it's not reliant on fat javascript frameworks.<br />
@@ -421,20 +433,45 @@
                 </aside>
             </section>
             <section>
-                <h2>Multi-Platform</h2>
+              <h2>Another DOM Example</h2>
+
+<pre><code class="javascript">window.requestAnimFrame = (function(){
+  return  window.requestAnimationFrame       ||
+          window.webkitRequestAnimationFrame ||
+          window.mozRequestAnimationFrame    ||
+          function( callback ){
+            window.setTimeout(callback, 1000 / FPS);
+          };
+})();
+
+var game = new Game();
+
+(function animloop() {
+  requestAnimFrame(animloop);
+  game.update();
+})();</code></pre>
+
+                <aside class="notes">
+                  <p>Further DOM example: Super Flappy Doge</p>
+                  <p>Put together by coop student Justin Vanderheide in about 1 week</p>
+                  <p>Might recognise, simple flappy bird clone</p>
+                  <p>Animation done by updating translate3d CSS property on elements</p>
+                </aside>
+            </section>
+            <section>
+                <h2>Run Anywhere</h2>
                 <ul>
-                  <li><span style="color:green;">Pro:</span> <b>Everything</b> has a browser</li>
-                  <li><span style="color:green;">Pro:</span> Almost all browsers use WebKit</li>
+                  <li><span style="color:green;">Pro:</span> <strong>Every modern device</strong> has a browser</li>
+                  <li><span style="color:green;">Pro:</span> Almost all mobile browsers use WebKit</li>
                   <li><span style="color:red;">Con:</span> Not all WebKits are created equal</li>
                   <em style="margin-left: 20px; display: inline-block; font-size: 80%;">translate3d on iOS = hardware acceleration<br/>translate3d on Android 2.x = broken keyboard</em>
                 </ul>
 
                 <aside class="notes">
-                    <h3 class="speaker">Owen:</h3>
+
                     <h4>LESSON: Multi-platform is easier, but not simple</h4>
                     <p>Great thing, everything has a browser, generally WebKit (not always equal)</p>
-                    <p>HTML5 allows for much easier multi-platorm support (first 90%)</p>
-                    <p>CSS property translate 3d</p>
+                    <p>More recent Android issue: during CSS animations on *some* modern Android browsers (4.2+), elements would tile - fail to repaint previous element locations (like old windows errors)</p>
                     <p>Other odd bugs: BB10 - Most compliant HMTL5 browser when launched, drop downs didn't work!</p>
                     <p>Also: not only different performance, but degrade performance differently</p>
                 </aside>
@@ -443,20 +480,21 @@
                 <h2>Platform Fragmentation</h2>
                 <table>
                   <tr>
-                    <td style="text-align:center;"><img src="/assets/images/ios_chart.png" style="width:50%;border:1px solid black;"></td>
-                    <td><img src="/assets/images/android_chart.png" style="width:100%;border:1px solid black;background-color: white;"></td>
+                    <td style="text-align:center;width:50%;"><img src="/assets/images/ios_chart.png" style="border:1px solid black;"></td>
+                    <td><img src="/assets/images/android_chart.png" style="border:1px solid black;background-color: white;"></td>
                 </table>
                 <div class="foot-note"><span style="vertical-align: top;">Sources:</span>
                   <span style="display:inline-block;certical-align:top;text-align:left;">
-                    <a href="https://developer.apple.com/devcenter/ios/checklist/">Apple - iOS Developer Center</a><br/>
+                    <a href="https://developer.apple.com/support/appstore/">Apple - iOS Developer Support Center</a><br/>
                     <a href="http://developer.android.com/about/dashboards/index.html">Google - Developer Dashboard</a><br/>
                   </span>
                 </div>
                 <aside class="notes">
-                    <h3 class="speaker">Owen:</h3>
-                    <p>Charts form Apple and Google, so take with a grain of salt<br/>
-                      -if any of you have tried developing for Android, this graph probably doesn't look quite right.</p>
-                    <p>Represents only 2 platforms</p>
+
+                    <p>Charts form Apple and Google, so take with a grain of salt</p>
+                    <p>Can't limit yourself to only the latest and greatest (eg, Android)</p>
+                    <p>Represents only 2 main platforms</p>
+                    <p>Android <strong>finally</strong> has websocket and requestAnimationFrame support</p>
                     <p>The horror of BlackBerry</p>
                     <p>Even so, still many different targets with very different browser experiences <b>(next slide)</b></p>
                 </aside>
@@ -483,12 +521,13 @@
                   </tr>
                 </table>
                 <aside class="notes">
-                    <h3 class="speaker">Owen:</h3>
+
                     <p>Take a closer look at main two platforms, still have...</p>
                     <p>Not exclusive to HTML5, but HTML5 isn't a magic bullet either</p>
+                    <p>Game/App Interfaces need to be tighter then documents</p>
                     <p>Some HTML5 specific things
                       <ul>
-                        <li>Need *some* responsive design, OR scrolling (scalling often not handled well)</li>
+                        <li>Need *some* responsive design, OR scrolling (scalling often not handled well - TowerUp)</li>
                         <li>CSS Authoring framework is <em>very</em> userfull (Compass)</li>
                       </ul>
                     </p>
@@ -512,26 +551,23 @@
                     </ul>
                 </div>
                 <aside class="notes">
-                    <h3 class="speaker">Adam:</h3>
-                    Slow
+
+
                     <ul>
-                      <li>dependant on remote assets</li>
-                      <li>slow to render</li>
-                    </ul>
-                    <ul>
-                        <li>Problem with DOM applications</li>
-                        <li>Mostly images, but page rendering can also be a factor with multi-part page rendering</li>
+                      <li>remote assets can be slow to render</li>
+                      <li>get image (or other asset) pop in</li>
+                      <li>Mostly images, but page rendering can also be a factor with multi-part page rendering</li>
                     </ul>
                     <ul>
                         <li>Network time is the biggest delay. Especially over mobile networks, preloading is essential.</li>
                         <li>Application Cache limited to 10mb</li>
-                        <li>iOS doesn't support link prefetching</li>
+                        <li>link prefetching generally not yet supported on mobile</li>
                     </ul>
-
                     <ul>
                         <li>iOS won’t render offscreen or "display: none;" images</li>
                         <li>&lt;img&gt; tags will not be loaded, even if they’re visible, if the device is low on memory</li>
-                        <li>large images loaded in 1024x1024 chunks on iOS</li>
+                        <li>large images loaded in 1024x1024 chunks on iOS<br />
+                          - mighty map sprite example</li>
                     </ul>
 
 
@@ -546,8 +582,7 @@
                     <ul>
                         <li>Write your own cache in the native client</li>
                         <li>Use <em class="css-attr">background-image</em> not <em class="html">&lt;img&gt;</em></li>
-                        <li>Preload in a “visible”
-                        container, that has a low z-index</li>
+                        <li>Preload in a “visible” container, that has a low z-index</li>
                     </ul>
                     <pre><code class="css">
   #preload {
@@ -566,8 +601,9 @@
                     </div>
                 </div>
                 <aside class="notes">
-                    <h3 class="speaker">Adam:</h3>
+
                     <ul>
+                        <li>gets around browser issues for image preloading</li>
                         <li>A custom native client can cache images, and you can ship important images with your build</li>
                         <li>Don't show the page until window.onload is fired.   Or use the iOS webViewDidFinishLoad() method.  Every browser is a bit different.</li>
                     </ul>
@@ -578,13 +614,64 @@
                 </aside>
             </section>
             <section>
+              <h2>High Performance UI</h2>
+              <div style="text-align: left;">
+                <h3>3 Options:</h3>
+                <ul>
+                  <li>Store all UI (HTML, CSS, JavaScript) locally</li>
+                  <li>Use client side templating and data binding</li>
+                  <li>Cache all content and only refresh what's needed</li>
+                </ul>
+              </div>
+
+              <aside class="notes">
+                <p>To compete with native games, need a UI that feels responsive</p>
+                <p>We've used all 3</p>
+                <p>If doing an offline only game, bundle UI in app (or use application cache - WordSwap)</p>
+                <p>We've largely moved towards using AngularJS for new games</p>
+                <p>Approach taken on existing games</p>
+              </aside>
+            </section>
+            <section>
+              <h2>Caching Content</h2>
+
+<pre><code class="javascript">
+function LoadBody(url, targetId) {
+  var $currentArea = $(".content_area:visible");
+  var $target = $("#"+targetId);
+
+  if (target_id == $current_area.attr("id") || $target.is(":empty")) {
+    $.get(url, function( data, status, xhr ) {
+      LoadSuccess($target, data);
+    });
+  } else { LoadSuccess($target, ""); }
+}
+
+function LoadSuccess($target, data){
+  if (data) { $target.html(data); }
+  $(".content_area").hide();
+  $target.show();
+
+  //request to reload any potentially changed content
+}
+</code></pre>
+              <aside class="notes">
+                <ul>
+                  <p>Very basic approach</p>
+                  <p>Can extend with watch attributes that trigger a full refresh</p>
+                  <p>And with preloading pages, updating in the background (trade off data usage for performance)</p>
+                </ul>
+              </aside>
+            </section>
+            <!--
+            <section>
                 <h2>Cheating</h2>
                 <p>Editing a browser page is easy</p>
                 <p>Automating a browser page is easy</p>
                 <p>All communication and front end code is compromised</p>
 
                 <aside class="notes">
-                    <h3 class="speaker">Owen:</h3>
+
                     <p style="margin-bottom: 0in">Suite of tools for editing in the browser</p>
                     <p style="margin-bottom: 0in">Your game can be automated using out of the box testing software</p>
                     <p style="margin-bottom: 0in">Harder on mobile, bigger target on the web</p>
@@ -612,7 +699,7 @@
 end</code></pre>
 
                 <aside class="notes">
-                    <h3 class="speaker">Owen:</h3>
+
                     <p>Example of Auto Click Detection</p>
                     <p>Approach: too many <em>regular</em> actions for a human, pop up modal dialog asking confirmation</p>
                     <p>Problems:
@@ -630,7 +717,7 @@ end</code></pre>
                 <img src="/assets/images/cheater.png"/>
 
                 <aside class="notes">
-                    <h3 class="speaker">Owen:</h3>
+
                     <p>Example of Data Analysis</p>
                     <p>Approach: find patterns in request</p>
                     <p>best, but hard to automate (one type of traditional cheat detection)</p>
@@ -651,7 +738,7 @@ end
                 </code></pre>
 
                 <aside class="notes">
-                    <h3 class="speaker">Owen:</h3>
+
                     <p>Example of Acquire Lock</p>
                     <p>Problem: race conditions issue with multiple server threads processing simultaneously</p>
                     <p>Can code around, but can be tough if not planned from the start (legacy games)</p>
@@ -664,10 +751,10 @@ end
                   Average iOS review period: 1 week
                   <br>
                 </div>
-                <svg width="670" height="500" style="overflow: hidden;"><defs id="defs"><clipPath id="_ABSTRACT_RENDERER_ID_0"><rect x="40" y="20" width="630" height="400"></rect></clipPath></defs><g><rect x="40" y="20" width="630" height="400" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g clip-path="url(#_ABSTRACT_RENDERER_ID_0)"><g><rect x="102" y="20" width="1" height="400" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="262" y="20" width="1" height="400" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="417" y="20" width="1" height="400" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="574" y="20" width="1" height="400" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="40" y="419" width="630" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="40" y="319" width="630" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="40" y="220" width="630" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="40" y="120" width="630" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="40" y="20" width="630" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect></g><g><rect x="40" y="20" width="1" height="400" stroke="none" stroke-width="0" fill="#333333"></rect><rect x="40" y="419" width="630" height="1" stroke="none" stroke-width="0" fill="#333333"></rect></g><g><path d="M669.5,286.23400000000004L667.771978021978,283.84000000000003L666.043956043956,279.451L664.315934065934,279.052L662.5879120879121,277.456L660.8598901098901,275.062L659.1318681318681,271.072L657.4038461538462,264.688L655.6758241758241,258.703L653.9478021978022,246.334L652.2197802197802,238.753L650.4917582417582,235.96L648.7637362637363,233.167L647.0357142857142,231.571L645.3076923076923,230.374L643.5796703296703,223.192L641.8516483516484,216.40900000000002L640.1236263736264,211.621L638.3956043956043,208.429L636.6675824175824,206.43400000000003L634.9395604395604,204.04L633.2115384615385,202.045L631.4835164835165,194.863L629.7554945054945,190.07500000000002L628.0274725274725,181.29700000000003L626.2994505494505,174.11499999999998L624.5714285714286,166.933L622.8434065934066,164.53900000000002L621.1153846153846,162.14499999999998L619.3873626373626,157.35699999999997L617.6593406593406,150.973L615.9313186813187,150.973L614.2032967032967,149.377L612.4752747252747,150.175L610.7472527472527,150.973L609.0192307692307,153.36700000000002L607.2912087912088,151.77100000000002L605.5631868131868,151.372L603.8351648351648,154.16500000000002L602.1071428571429,160.15000000000003L600.3791208791208,162.54399999999998L598.6510989010989,164.93800000000002L596.9230769230769,166.933L595.195054945055,166.933L593.467032967033,166.13500000000002L591.7390109890109,167.73100000000002L590.010989010989,171.32200000000003L588.282967032967,172.519L586.554945054945,174.11499999999998L584.8269230769231,178.10500000000002L583.0989010989011,179.70100000000002L581.3708791208791,180.499L579.6428571428571,180.10000000000002L577.9148351648352,180.499L576.1868131868132,183.691L574.4587912087912,187.282L572.7307692307692,188.479L571.0027472527472,190.474L569.2747252747253,190.873L567.5467032967033,193.26700000000002L565.8186813186813,195.661L564.0906593406593,199.25200000000004L562.3626373626373,204.43900000000002L560.6346153846154,209.22700000000003L558.9065934065934,210.424L557.1785714285714,211.621L555.4505494505495,213.616L553.7225274725274,218.00500000000002L551.9945054945055,222.394L550.2664835164835,225.58599999999998L548.5384615384615,229.17700000000002L546.8104395604396,232.369L545.0824175824175,231.17200000000003L543.3543956043956,231.97L541.6263736263736,233.965L539.8983516483516,235.162L538.1703296703297,239.15200000000002L536.4423076923076,242.74300000000002L534.7142857142858,243.142L532.9862637362637,242.344L531.2582417582418,242.344L529.5302197802198,243.541L527.8021978021977,245.137L526.0741758241759,243.94L524.3461538461538,242.344L522.6181318681319,241.54600000000002L520.8901098901099,238.354L519.1620879120878,237.556L517.434065934066,237.15699999999998L515.7060439560439,235.162L513.978021978022,232.76800000000003L512.25,231.17200000000003L510.521978021978,226.78300000000002L508.79395604395603,221.596L507.0659340659341,219.20200000000003L505.33791208791206,217.207L503.6098901098901,216.01000000000002L501.8818681318681,212.818L500.15384615384613,209.626L498.4258241758242,204.83800000000002L496.69780219780216,199.651L494.9697802197802,196.459L493.24175824175825,195.661L491.51373626373623,194.863L489.7857142857143,195.661L488.0576923076923,196.858L486.3296703296703,189.67600000000002L484.60164835164835,185.287L482.87362637362634,183.292L481.1456043956044,182.095L479.4175824175824,180.499L477.6895604395604,180.898L475.96153846153845,179.70100000000002L474.2335164835165,177.70600000000002L472.5054945054945,174.11499999999998L470.7774725274725,172.918L469.0494505494505,172.918L467.32142857142856,173.317L465.5934065934066,174.11499999999998L463.8653846153846,175.312L462.1373626373626,174.514L460.40934065934067,173.317L458.68131868131866,172.918L456.9532967032967,172.918L455.2252747252747,173.716L453.49725274725273,174.514L451.7692307692308,174.913L450.04120879120876,174.514L448.3131868131868,172.918L446.58516483516485,171.32200000000003L444.85714285714283,172.519L443.1291208791209,172.918L441.40109890109886,171.721L439.6730769230769,174.11499999999998L437.94505494505495,174.11499999999998L436.21703296703294,171.721L434.489010989011,172.918L432.760989010989,172.918L431.032967032967,174.514L429.30494505494505,175.312L427.57692307692304,176.11L425.8489010989011,176.90800000000002L424.1208791208791,176.90800000000002L422.3928571428571,177.70600000000002L420.66483516483515,178.903L418.9368131868132,180.898L417.2087912087912,184.48900000000003L415.4807692307692,185.287L413.7527472527472,185.686L412.02472527472526,184.888L410.2967032967033,186.883L408.5686813186813,188.08L406.84065934065933,190.474L405.1126373626374,190.873L403.38461538461536,191.67100000000002L401.6565934065934,190.07500000000002L399.92857142857144,188.878L398.20054945054943,188.08L396.4725274725275,189.67600000000002L394.74450549450546,190.07500000000002L393.0164835164835,190.07500000000002L391.28846153846155,187.681L389.56043956043953,186.484L387.8324175824176,182.095L386.1043956043956,180.10000000000002L384.3763736263736,180.10000000000002L382.64835164835165,180.499L380.92032967032964,181.29700000000003L379.1923076923077,181.29700000000003L377.4642857142857,181.696L375.7362637362637,180.499L374.00824175824175,178.903L372.2802197802198,179.70100000000002L370.5521978021978,180.898L368.8241758241758,183.292L367.0961538461538,182.89300000000003L365.36813186813185,180.499L363.6401098901099,179.30200000000002L361.9120879120879,178.903L360.1840659340659,178.50400000000002L358.45604395604397,178.10500000000002L356.72802197802196,177.70600000000002L355,177.70600000000002L353.271978021978,176.90800000000002L351.54395604395603,176.11L349.8159340659341,177.70600000000002L348.08791208791206,178.903L346.3598901098901,180.499L344.63186813186815,182.095L342.90384615384613,185.287L341.1758241758242,186.08500000000004L339.44780219780216,189.67600000000002L337.7197802197802,192.07L335.99175824175825,195.661L334.26373626373623,199.25200000000004L332.5357142857143,201.247L330.8076923076923,201.247L329.0796703296703,202.045L327.35164835164835,201.247L325.62362637362634,198.454L323.8956043956044,199.651L322.1675824175824,197.257L320.4395604395604,194.065L318.71153846153845,191.67100000000002L316.9835164835165,188.878L315.2554945054945,188.479L313.5274725274725,187.282L311.79945054945057,187.282L310.07142857142856,187.282L308.3434065934066,188.08L306.6153846153846,186.484L304.8873626373626,186.484L303.15934065934067,184.48900000000003L301.43131868131866,184.888L299.7032967032967,185.686L297.97527472527474,187.681L296.24725274725273,190.873L294.5192307692308,192.86800000000002L292.79120879120876,192.07L291.0631868131868,191.27200000000002L289.33516483516485,193.26700000000002L287.6071428571429,193.666L285.8791208791209,196.459L284.15109890109886,201.247L282.4230769230769,200.449L280.69505494505495,199.25200000000004L278.967032967033,198.454L277.239010989011,198.454L275.51098901098896,198.853L273.782967032967,202.045L272.05494505494505,201.64600000000002L270.3269230769231,204.43900000000002L268.5989010989011,206.43400000000003L266.8708791208791,205.636L265.1428571428571,204.04L263.41483516483515,203.641L261.6868131868132,203.24200000000002L259.95879120879124,201.64600000000002L258.2307692307692,199.25200000000004L256.5027472527472,197.65600000000003L254.77472527472526,194.065L253.0467032967033,191.67100000000002L251.3186813186813,190.07500000000002L249.59065934065933,189.67600000000002L247.86263736263734,189.67600000000002L246.1346153846154,188.479L244.4065934065934,186.883L242.67857142857142,185.686L240.95054945054943,184.48900000000003L239.22252747252747,182.095L237.4945054945055,180.898L235.7664835164835,180.10000000000002L234.03846153846152,176.90800000000002L232.31043956043956,171.721L230.58241758241758,168.529L228.8543956043956,164.93800000000002L227.1263736263736,162.94300000000004L225.39835164835165,160.94799999999998L223.67032967032966,157.75600000000003L221.94230769230768,154.56400000000002L220.21428571428572,150.973L218.48626373626374,146.983L216.75824175824175,143.392L215.03021978021977,141.796L213.3021978021978,139.40200000000004L211.57417582417582,137.40699999999998L209.84615384615384,136.60900000000004L208.11813186813185,133.81600000000003L206.3901098901099,131.02299999999997L204.6620879120879,129.02800000000002L202.93406593406593,128.23000000000002L201.20604395604394,126.63400000000001L199.47802197802199,123.44200000000001L197.75,119.053L196.02197802197801,115.46199999999999L194.29395604395603,111.47200000000004L192.56593406593407,105.88600000000002L190.8379120879121,101.89600000000002L189.1098901098901,99.10300000000001L187.38186813186812,97.507L185.65384615384616,95.51200000000006L183.92582417582418,91.12299999999999L182.1978021978022,86.33500000000004L180.4697802197802,81.94599999999997L178.74175824175825,79.15300000000002L177.01373626373626,77.15800000000002L175.28571428571428,76.75900000000001L173.5576923076923,75.16299999999995L171.82967032967034,72.37000000000006L170.10164835164835,70.774L168.37362637362637,69.57700000000006L166.64560439560438,67.981L164.91758241758242,67.981L163.18956043956044,68.38L161.46153846153845,69.976L159.7335164835165,69.57700000000006L158.00549450549448,70.375L156.27747252747253,71.173L154.54945054945054,71.971L152.82142857142856,71.971L151.0934065934066,73.56700000000001L149.3653846153846,77.95600000000002L147.63736263736263,85.13799999999998L145.90934065934067,87.53199999999998L144.18131868131866,92.71900000000005L142.4532967032967,97.108L140.72527472527472,99.10300000000001L138.99725274725273,104.29000000000002L137.26923076923077,109.87600000000003L135.5412087912088,115.06299999999999L133.8131868131868,115.46199999999999L132.08516483516485,116.26000000000005L130.35714285714286,120.25L128.62912087912088,124.24000000000001L126.9010989010989,126.23500000000001L125.17307692307692,125.83600000000001L123.44505494505495,128.62900000000002L121.71703296703296,131.02299999999997L119.98901098901099,134.61400000000003L118.26098901098901,140.2L116.53296703296704,142.594L114.80494505494505,140.2L113.07692307692308,135.81099999999998L111.3489010989011,131.02299999999997L109.62087912087912,127.03300000000002L107.89285714285714,124.63900000000001L106.16483516483517,122.644L104.43681318681318,120.25L102.70879120879121,115.46199999999999L100.98076923076923,111.07299999999998L99.25274725274724,107.48200000000003L97.52472527472527,101.89600000000002L95.7967032967033,91.92099999999999L94.06868131868131,90.32499999999999L92.34065934065933,85.13799999999998L90.61263736263736,82.34500000000003L88.88461538461539,81.54699999999997L87.1565934065934,73.96600000000001L85.42857142857143,65.18799999999999L83.70054945054946,58.00599999999997L81.97252747252747,54.01600000000002L80.24450549450549,52.420000000000016L78.51648351648352,52.420000000000016L76.78846153846155,50.42500000000001L75.06043956043956,49.62700000000001L73.33241758241758,48.031000000000006L71.6043956043956,45.238L69.87637362637362,43.641999999999996L68.14835164835165,42.44500000000005L66.42032967032966,40.84899999999999L64.6923076923077,36.061000000000035L62.964285714285715,31.67199999999997L61.23626373626374,30.874000000000024L59.50824175824176,32.07099999999997L57.78021978021978,33.26800000000003L56.0521978021978,36.85900000000004L54.324175824175825,39.25300000000004L52.59615384615385,41.24799999999999L50.86813186813187,42.84400000000005L49.14010989010989,44.44L47.41208791208791,44.44L45.684065934065934,45.238L43.956043956043956,46.03600000000006L42.22802197802198,44.44L40.5,42.44500000000005" stroke="#223344" stroke-width="2" fill-opacity="1" fill="none"></path></g></g><g></g><g><g><text text-anchor="middle" x="102.99679487179486" y="439.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">Oct 2012</text></g><g><text text-anchor="middle" x="262.04681776556777" y="439.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">Jan 2013</text></g><g><text text-anchor="middle" x="417.49679487179486" y="439.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">Apr 2013</text></g><g><text text-anchor="middle" x="574.7467948717948" y="439.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">Jul 2013</text></g><g><text text-anchor="end" x="32.5" y="424.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">0.0</text></g><g><text text-anchor="end" x="32.5" y="324.3" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">2.5</text></g><g><text text-anchor="end" x="32.5" y="224.55" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">5.0</text></g><g><text text-anchor="end" x="32.5" y="124.8" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">7.5</text></g><g><text text-anchor="end" x="32.5" y="25.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">10.0</text></g></g></g><g></g></svg>
+                <svg width="670" height="500" style="overflow: hidden;"><defs id="defs"><clipPath id="_ABSTRACT_RENDERER_ID_0"><rect x="40" y="20" width="630" height="400"></rect></clipPath></defs><g><rect x="40" y="20" width="630" height="400" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g clip-path="url(#_ABSTRACT_RENDERER_ID_0)"><g><rect x="68" y="20" width="1" height="400" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="225" y="20" width="1" height="400" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="384" y="20" width="1" height="400" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="543" y="20" width="1" height="400" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="40" y="419" width="630" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="40" y="319" width="630" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="40" y="220" width="630" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="40" y="120" width="630" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="40" y="20" width="630" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect></g><g><rect x="40" y="20" width="1" height="400" stroke="none" stroke-width="0" fill="#333333"></rect><rect x="40" y="419" width="630" height="1" stroke="none" stroke-width="0" fill="#333333"></rect></g><g><path d="M669.5,60.89875000000001L667.771978021978,56.40999999999997L666.043956043956,57.90625L664.315934065934,56.40999999999997L662.5879120879121,58.90375L660.8598901098901,58.90375L659.1318681318681,64.88874999999996L657.4038461538462,70.87374999999997L655.6758241758241,79.85125L653.9478021978022,96.31L652.2197802197802,111.77125000000001L650.4917582417582,118.75374999999997L648.7637362637363,121.2475L647.0357142857142,125.23749999999995L645.3076923076923,124.73874999999998L643.5796703296703,124.73874999999998L641.8516483516484,126.73374999999999L640.1236263736264,131.22249999999997L638.3956043956043,126.23500000000001L636.6675824175824,122.74374999999998L634.9395604395604,115.26250000000005L633.2115384615385,114.26499999999999L631.4835164835165,112.76874999999995L629.7554945054945,109.27750000000003L628.0274725274725,107.78125L626.2994505494505,106.28499999999997L624.5714285714286,107.28250000000003L622.8434065934066,109.27750000000003L621.1153846153846,106.28499999999997L619.3873626373626,109.27750000000003L617.6593406593406,114.26499999999999L615.9313186813187,111.77125000000001L614.2032967032967,122.245L612.4752747252747,126.23500000000001L610.7472527472527,135.21249999999998L609.0192307692307,144.19L607.2912087912088,160.14999999999998L605.5631868131868,167.63125000000002L603.8351648351648,171.12249999999997L602.1071428571429,173.61625L600.3791208791208,174.61374999999998L598.6510989010989,175.11249999999998L596.9230769230769,181.59625000000003L595.195054945055,184.09L593.467032967033,187.58124999999998L591.7390109890109,192.56875000000002L590.010989010989,191.57125L588.282967032967,192.07000000000002L586.554945054945,191.57125L584.8269230769231,190.57375000000002L583.0989010989011,184.09L581.3708791208791,186.085L579.6428571428571,184.09L577.9148351648352,182.095L576.1868131868132,182.095L574.4587912087912,182.59375L572.7307692307692,182.095L571.0027472527472,190.07500000000002L569.2747252747253,193.56625L567.5467032967033,198.55375L565.8186813186813,202.045L564.0906593406593,205.03750000000002L562.3626373626373,205.03750000000002L560.6346153846154,208.03L558.9065934065934,210.52374999999998L557.1785714285714,206.035L555.4505494505495,211.52125L553.7225274725274,222.9925L551.9945054945055,223.49124999999998L550.2664835164835,236.95749999999998L548.5384615384615,228.97750000000002L546.8104395604396,206.035L545.0824175824175,203.04250000000002L543.3543956043956,194.56375L541.6263736263736,189.0775L539.8983516483516,185.08749999999998L538.1703296703297,189.0775L536.4423076923076,194.56375L534.7142857142858,199.55124999999998L532.9862637362637,199.0525L531.2582417582418,200.54875L529.5302197802198,196.05999999999997L527.8021978021977,193.0675L526.0741758241759,190.07500000000002L524.3461538461538,192.07000000000002L522.6181318681319,191.0725L520.8901098901099,189.0775L519.1620879120878,186.58375L517.434065934066,182.59375L515.7060439560439,182.095L513.978021978022,180.59875L512.25,175.61125L510.521978021978,170.125L508.79395604395603,177.1075L507.0659340659341,178.60375L505.33791208791206,184.09L503.6098901098901,187.58124999999998L501.8818681318681,187.58124999999998L500.15384615384613,191.0725L498.4258241758242,197.55624999999998L496.69780219780216,197.0575L494.9697802197802,197.0575L493.24175824175825,197.55624999999998L491.51373626373623,197.0575L489.7857142857143,196.05999999999997L488.0576923076923,197.55624999999998L486.3296703296703,192.07000000000002L484.60164835164835,180.59875L482.87362637362634,172.61874999999998L481.1456043956044,162.64374999999995L479.4175824175824,157.65625L477.6895604395604,154.66375L475.96153846153845,148.67875000000004L474.2335164835165,137.70624999999995L472.5054945054945,132.22000000000003L470.7774725274725,121.2475L469.0494505494505,113.76625000000001L467.32142857142856,111.77125000000001L465.5934065934066,106.28499999999997L463.8653846153846,100.29999999999995L462.1373626373626,98.305L460.40934065934067,96.80875000000003L458.68131868131866,95.81124999999997L456.9532967032967,88.82875000000001L455.2252747252747,90.32500000000005L453.49725274725273,90.82375000000002L451.7692307692308,92.81875000000002L450.04120879120876,93.81624999999997L448.3131868131868,103.79124999999999L446.58516483516485,110.27499999999998L444.85714285714283,109.27750000000003L443.1291208791209,111.27250000000004L441.40109890109886,112.26999999999998L439.6730769230769,111.77125000000001L437.94505494505495,108.77875L436.21703296703294,110.27499999999998L434.489010989011,107.78125L432.760989010989,112.26999999999998L431.032967032967,111.77125000000001L429.30494505494505,110.27499999999998L427.57692307692304,102.29499999999996L425.8489010989011,102.29499999999996L424.1208791208791,91.32249999999999L422.3928571428571,84.83875L420.66483516483515,81.84625L418.9368131868132,78.35500000000002L417.2087912087912,76.36000000000001L415.4807692307692,74.36500000000001L413.7527472527472,71.87125000000003L412.02472527472526,75.36249999999995L410.2967032967033,84.34000000000003L408.5686813186813,85.83625L406.84065934065933,85.83625L405.1126373626374,90.82375000000002L403.38461538461536,105.78625L401.6565934065934,114.26499999999999L399.92857142857144,123.74125000000004L398.20054945054943,146.185L396.4725274725275,158.65375L394.74450549450546,162.64374999999995L393.0164835164835,169.12750000000003L391.28846153846155,181.59625000000003L389.56043956043953,188.08L387.8324175824176,194.06500000000003L386.1043956043956,203.54125L384.3763736263736,200.04999999999998L382.64835164835165,196.55875L380.92032967032964,190.07500000000002L379.1923076923077,179.60125000000002L377.4642857142857,166.63375L375.7362637362637,153.66625L374.00824175824175,137.70624999999995L372.2802197802198,125.23749999999995L370.5521978021978,119.75125000000003L368.8241758241758,109.27750000000003L367.0961538461538,95.3125L365.36813186813185,88.82875000000001L363.6401098901099,69.3775L361.9120879120879,42.94375000000002L360.1840659340659,30.475000000000023L358.45604395604397,28.480000000000018L356.72802197802196,24.49000000000001L355,26.485000000000014L353.271978021978,33.96625L351.54395604395603,70.87374999999997L349.8159340659341,88.33000000000004L348.08791208791206,115.26250000000005L346.3598901098901,131.72125L344.63186813186815,158.65375L342.90384615384613,181.0975L341.1758241758242,201.0475L339.44780219780216,205.53625L337.7197802197802,207.0325L335.99175824175825,209.52625L334.26373626373623,210.02499999999998L332.5357142857143,216.01L330.8076923076923,221.49625L329.0796703296703,230.9725L327.35164835164835,236.45875L325.62362637362634,239.95L323.8956043956044,238.9525L322.1675824175824,238.9525L320.4395604395604,238.9525L318.71153846153845,238.45375L316.9835164835165,235.46125L315.2554945054945,238.45375L313.5274725274725,238.9525L311.79945054945057,239.45125000000002L310.07142857142856,242.44375000000002L308.3434065934066,244.43875L306.6153846153846,249.42624999999998L304.8873626373626,246.43375L303.15934065934067,254.41375L301.43131868131866,262.8925L299.7032967032967,266.38375L297.97527472527474,267.88L296.24725274725273,269.875L294.5192307692308,270.37375L292.79120879120876,266.38375L291.0631868131868,260.8975L289.33516483516485,254.41375L287.6071428571429,248.9275L285.8791208791209,242.44375000000002L284.15109890109886,235.46125L282.4230769230769,218.005L280.69505494505495,200.04999999999998L278.967032967033,175.11249999999998L277.239010989011,146.185L275.51098901098896,126.73374999999999L273.782967032967,116.25999999999999L272.05494505494505,105.78625L270.3269230769231,93.81624999999997L268.5989010989011,79.85125L266.8708791208791,77.35749999999996L265.1428571428571,66.88374999999996L263.41483516483515,64.88874999999996L261.6868131868132,57.90625L259.95879120879124,56.90875L258.2307692307692,50.424999999999955L256.5027472527472,44.44L254.77472527472526,50.92375000000004L253.0467032967033,63.891250000000014L251.3186813186813,69.87625000000003L249.59065934065933,76.85874999999999L247.86263736263734,79.35249999999996L246.1346153846154,81.34749999999997L244.4065934065934,84.83875L242.67857142857142,92.32L240.95054945054943,98.80375000000004L239.22252747252747,100.79875000000004L237.4945054945055,105.28750000000002L235.7664835164835,109.27750000000003L234.03846153846152,114.76374999999996L232.31043956043956,117.75625000000002L230.58241758241758,117.75625000000002L228.8543956043956,116.75874999999996L227.1263736263736,118.255L225.39835164835165,119.75125000000003L223.67032967032966,120.74874999999997L221.94230769230768,119.2525L220.21428571428572,120.74874999999997L218.48626373626374,121.2475L216.75824175824175,121.74625000000003L215.03021978021977,125.23749999999995L213.3021978021978,125.23749999999995L211.57417582417582,119.75125000000003L209.84615384615384,116.75874999999996L208.11813186813185,120.74874999999997L206.3901098901099,122.74374999999998L204.6620879120879,127.73125000000005L202.93406593406593,125.73625000000004L201.20604395604394,125.73625000000004L199.47802197802199,133.21749999999997L197.75,141.69624999999996L196.02197802197801,141.1975L194.29395604395603,145.68624999999997L192.56593406593407,149.1775L190.8379120879121,153.66625L189.1098901098901,157.15750000000003L187.38186813186812,162.64374999999995L185.65384615384616,176.11L183.92582417582418,183.0925L182.1978021978022,189.0775L180.4697802197802,194.06500000000003L178.74175824175825,202.045L177.01373626373626,204.04L175.28571428571428,206.53375000000003L173.5576923076923,215.51125000000002L171.82967032967034,220.49875L170.10164835164835,228.97750000000002L168.37362637362637,229.47625L166.64560439560438,227.98000000000002L164.91758241758242,225.985L163.18956043956044,221.995L161.46153846153845,220.9975L159.7335164835165,219.50125L158.00549450549448,213.51625L156.27747252747253,210.52374999999998L154.54945054945054,204.04L152.82142857142856,201.0475L151.0934065934066,195.0625L149.3653846153846,187.58124999999998L147.63736263736263,183.0925L145.90934065934067,177.60625000000002L144.18131868131866,170.125L142.4532967032967,166.63375L140.72527472527472,164.63875L138.99725274725273,161.14750000000004L137.26923076923077,147.68124999999998L135.5412087912088,141.1975L133.8131868131868,136.70875L132.08516483516485,132.71875L130.35714285714286,127.73125000000005L128.62912087912088,126.23500000000001L126.9010989010989,121.2475L125.17307692307692,116.75874999999996L123.44505494505495,111.27250000000004L121.71703296703296,109.77625L119.98901098901099,108.27999999999997L118.26098901098901,106.78375L116.53296703296704,108.77875L114.80494505494505,109.77625L113.07692307692308,113.26750000000004L111.3489010989011,118.75374999999997L109.62087912087912,114.76374999999996L107.89285714285714,114.76374999999996L106.16483516483517,114.76374999999996L104.43681318681318,117.2575L102.70879120879121,116.25999999999999L100.98076923076923,117.75625000000002L99.25274725274724,118.255L97.52472527472527,117.75625000000002L95.7967032967033,118.75374999999997L94.06868131868131,118.75374999999997L92.34065934065933,115.26250000000005L90.61263736263736,115.26250000000005L88.88461538461539,113.26750000000004L87.1565934065934,108.27999999999997L85.42857142857143,111.27250000000004L83.70054945054946,111.77125000000001L81.97252747252747,111.27250000000004L80.24450549450549,109.77625L78.51648351648352,111.27250000000004L76.78846153846155,109.27750000000003L75.06043956043956,108.77875L73.33241758241758,109.27750000000003L71.6043956043956,108.27999999999997L69.87637362637362,106.28499999999997L68.14835164835165,108.27999999999997L66.42032967032966,106.78375L64.6923076923077,102.79375000000005L62.964285714285715,107.28250000000003L61.23626373626374,111.27250000000004L59.50824175824176,112.26999999999998L57.78021978021978,113.76625000000001L56.0521978021978,113.26750000000004L54.324175824175825,116.25999999999999L52.59615384615385,117.75625000000002L50.86813186813187,118.255L49.14010989010989,124.24000000000001L47.41208791208791,130.22500000000002L45.684065934065934,136.21000000000004L43.956043956043956,137.70624999999995L42.22802197802198,143.1925L40.5,152.16999999999996" stroke="#223344" stroke-width="2" fill-opacity="1" fill="none"></path></g></g><g></g><g><g><text text-anchor="middle" x="68.43635531135531" y="439.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">Apr 2013</text></g><g><text text-anchor="middle" x="225.6863553113553" y="439.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">Jul 2013</text></g><g><text text-anchor="middle" x="384.6643772893773" y="439.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">Oct 2013</text></g><g><text text-anchor="middle" x="543.7144001831502" y="439.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">Jan 2014</text></g><g><text text-anchor="end" x="29" y="424.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">0.0</text></g><g><text text-anchor="end" x="29" y="324.3" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">2.0</text></g><g><text text-anchor="end" x="29" y="224.55" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">4.0</text></g><g><text text-anchor="end" x="29" y="124.8" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">6.0</text></g><g><text text-anchor="end" x="29" y="25.05" font-family="Arial" font-size="13" stroke="none" stroke-width="0" fill="#444444">8.0</text></g></g></g><g></g></svg>
                 <div class="foot-note">Source: <a href="http://reviewtimes.shinydevelopment.com/">http://reviewtimes.shinydevelopment.com</a></div>
                 <aside class="notes">
-                    <h3 class="speaker">Adam:</h3>
+
 
                     Rapid development and Deployment
                     <ul>
@@ -686,6 +773,8 @@ end
                     </ul>
                 </aside>
             </section>
+            -->
+            <!--
             <section>
               <h2>Room to grow</h2>
               <p>Still need a native client for:</p>
@@ -698,9 +787,8 @@ end
                 <li>Distribution</li>
               </ul>
               <aside class="notes">
-                <h3 class="speaker">Adam:</h3>
                 <ul>
-                  <li>Sound is getting better, but until everyone has web audio api, it's a terrible hack. (Audio Sprite-sheeting)</li>
+                  <li>Sound is getting better, but until everyone has web audio api (iOS 6+, no Android), it's a terrible hack. (Audio Sprite-sheeting)</li>
                   <li>Payments: There's PayPal, but it's getting forced out</li>
                   <li>Sockets: Android <b>still</b> doesn't have WebSocket support!</li>
                   <li>Sensors: Some platforms provide <em>some</em> access, but inconsistent, limited and often requires in browser permissions</li>
@@ -712,6 +800,7 @@ end
                 </ul>
               </aside>
             </section>
+            -->
             <section>
                 <h2>Thank you</h2>
                 <div>Questions?</div>
@@ -719,16 +808,15 @@ end
                     <br>
                 </div>
                 <div class="contacts">
-                  <div class="right">
+                  <div class="left">
                     Owen Lawson<br />
                     <a href="mailto:owen@uken.com?Subject=PAX%20Talk" class="roll">owen@uken.com</a><br />
                     @OwenCPL</div>
-                  <div class="left">
+                  <div class="right">
+                    Special Thanks:<br />
                     Adam Proctor<br />
-                    <a href="mailto:adam@uken.com?Subject=PAX%20Talk" class="roll">adam@uken.com</a><br />
-                    @aproctor</div>
+                    Justin Vanderheide</div>
                 </div>
-                <div class="footnote" style="margin-top: 3em;"><a href="http://s.uken.com/paxdev">http://s.uken.com/paxdev</a></div>
             </section>
       </div>
 
