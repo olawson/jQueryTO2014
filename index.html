@@ -227,23 +227,13 @@
                     <h2>
                           Lessons Learned from Five Years of Building HTML5 Games
                     </h2>
-                    <div class="footnote">
-                      <div style="float: right;margin-right: 60px;">Owen Lawson</div>
-                    </div>
-
                 <aside class="notes">
-                    <h2>Who are we?</h2>
-
-
-                <h3 class="speaker">Owen</h3>
-                <p>Welcome, has anyone made HTML5 games?<p>
+                <p>Welcome, my name is... (etc.)<p>
                 <ul>
-                  <li>Owen's history and role at Uken
-                    <ul>
-                      <li>One of the first hires at Uken</li>
-                      <li>Working with Web Apps and Games for the past 6 years</li>
-                    </ul>
-                  </li>
+                  <li>A lead game developer at Uken Games</li>
+                  <li>One of the first hires at Uken</li>
+                  <li>Working with Web Apps and Games for the past 6 years</li>
+                  <li>Talking about some of the lessons learned over the past 5 years building games with web technology</li>
                 </ul>
               </aside>
             </section>
@@ -262,6 +252,7 @@
                     <img class="inline app-icon" src="icons/streetz.png" />
                     <img class="inline app-icon" src="icons/mighty.png" />
                     <img class="inline app-icon" src="icons/bingo.png" />
+                    <img class="inline app-icon" src="icons/wordswap.png" />
                   </p>
                   <p style="padding: 10px;">
                     <img src="icons/facebook_square_icon.png" class="inline"/>
@@ -275,37 +266,21 @@
                   <p>Toronto's Largest Independent Game Studio</p>
                 </div>
                 <aside class="notes">
-
-                  <p>Tell about Uken, why we're here</p>
+                  <p>A little about Uken</p>
                   <ul>
-                    <li>5 years old, grown to around 60 people</li>
+                    <li>5 years old, grown to around 65 people</li>
                     <li>Toronto's largest Independant Game Studio</li>
-                    <li>Built on revenue, not venture capital</li>
-                    <li>4 game teams</li>
-                    <li>9 games out, all currently HTML5 based, or will be shortly</li>
+                    <li>Building on revenue</li>
+                    <li>10 games out, most HTML5 based</li>
                     <li>7 platforms</li>
                   </ul>
                </aside>
             </section>
             <section>
-              <h2>So you want to make a game?</h2>
-                <p class='fragment'>What platform will you build for?</p>
-                <p class='fragment'>How will you package your game?</p>
-
-              <aside class="notes">
-                <p>iOS and Android fastest growing games market<br />
-                  - 2.9X growth in 2013</p>
-                <p>Pure web or hybrid app?<br />
-                  - Hybrid offers better distribution and access to payments, push notifications, more sensors</p>
-                <p>these are the decisions we went with, and what I'll be focusing on, however the lessons should apply more broadly as well</p>
-              </aside>
-            </section>
-            <!--
-            <section>
-                <h2>HTML5 Now</h2>
+                <h2>Games with Web Technology</h2>
                 <div style="display:inline-block;width:45%;vertical-align:top;padding-top:1%;">
-                  <p>Post-mortem on building launching and supporting HTML5 games</p>
-                  <p style="margin-top:8%;">Many top grossing games are using HTML5</p>
+                  <p>Experiences building, lanuching and supporting HTML5 Games</p>
+                  <p style="margin-top:8%;">Many top games on mobile platforms are using HTML5</p>
                 </div>
                 <div style="display:inline-block;width:45%;">
                   <p>
@@ -317,11 +292,13 @@
                 <aside class="notes">
 
                   <ul>
-                    <li>Bit of a post-mortem</li>
+                    <li>Talk is about...</li>
                     <li>Our experiences building, lanuching and supporting HTML5 Games</li>
-                    <li>We'll go through some specific lessons learned, followed by Q &amp; A</li>
+                    <li>Lots of HTML5 game projects, but most are tech demos<br />
+                  - I've found it harder to find talks from people sharing successeful, in production games (can live off)</li>
+                    <li>I'll go through some specific lessons learned, followed by Q &amp; A</li>
                     <li>Had a lot of success, but also failures (TowerUp) - launched on first gen iPad, then iPhone</li>
-                    <li><p style="margin-bottom: 0in">Others have had succes too, Top Grossing games using HTML5</p>
+                    <li><p style="margin-bottom: 0in">Though rarer, many top games on mobile are using HTML5</p>
 
                     <ul>
                         <li><p style="margin-bottom: 0in">Rage of Bahamut</p></li>
@@ -332,14 +309,29 @@
                   </ul>
                 </aside>
             </section>
-            -->
+            <section>
+              <h2>So you want to make a game?</h2>
+                <p>What platform will you build for?</p>
+                <p>How will you package your game?</p>
+
+              <aside class="notes">
+                <ul>
+                  <li>iOS and Android fastest growing games market<br />
+                    - 2.9X growth in 2013</li>
+                  <li>Pure web or hybrid app? (Hybrid: native app wrapper around a WebView)<br />
+                    - Hybrid offers better distribution and access to payments, push notifications, more sensors</li>
+                    <br />
+                  <li>these are the decisions we went with, and what I'll be focusing on, however the lessons should apply more broadly as well</li>
+                </ul>
+              </aside>
+            </section>
             <section>
                 <h2>Canvas vs DOM</h2>
                 <div class="left-text">
                     <h3>Canvas</h3>
                     <ul>
-                        <li>direct control of rendering</li>
-                        <li>slow &amp; inconsistent</li>
+                        <li>Direct control of rendering</li>
+                        <li>Slow &amp; inconsistent</li>
                         <li><em class="striekout">WebGL</em> (not ready for mobile)</li>
                     </ul>
                     <h3>DOM</h3>
@@ -355,8 +347,8 @@
                     <ul>
                       <li>The canvas element came with the promise of direct rendering control
                       <ul>
+                        <li>Slow: Large canvas elements can be big performance hogs on mobile when trying to maintain a high framerate</li>
                         <li>canvas graphics libraries are still not that mature when it comes to more advanced techniques like double buffering and dirty rectangles</li>
-                        <li>Slow: Large canvas elements can be big performance hogs when trying to maintain a high framerate, especially on mobile (larger screen resolutions are not helping)</li>
                         <li>Inconsistent: requestAnimationFrame isn't supported everywhere (iOS 6+, Android 4.4+), and it's not fully reliable on all platforms.  Just like intervals and timeouts, the literal time passed between frames isn't very reliable (especially on mobile)</li>
                       </ul></li>
                       <li>WebGL: isn't supported on the major mobile platforms.  Other than in custom browsers.
@@ -367,7 +359,8 @@
                     </ul>
                     DOM
                     <ul>
-                        <li>everyone knows HTML, especially artists.</li>
+                        <li>accessible: everyone knows HTML, especially artists.<br />
+                          - Allows different team members to work more collaboratively, blurred lines between designers and developers</li>
                         <li>rapid prototyping and development</li>
                         <li>built in object model</li>
                         <li>CSS3 animations can be hardware accellerated</li>
@@ -376,9 +369,9 @@
                     Verdict
                     <ul>
                         <li>Our benchmarks have been mixed.</li>
-                        <li>DOM has a higher overhead of creating new elements, but once created can animate more elements without losing performance.  Something like a particle system is possible, but is slow unless you pool elements.</li>
-                        <li>Support for canvas is widespread, but until theres more work on things like WebGL and optimizing rendering</li>
-                        <li>Ultimately we decided to build most of our games using DOM elements, because CSS3 animations and hardware accelleration</li>
+                        <li>DOM has a higher overhead of creating new elements, and can slow down when there's a high number of animated elements on screen</li>
+                        <li>Canvas better for many elements, but can struggle maintaining framerate when drawing a large area every frame</li>
+                        <li>Ultimately we've found we can get the best performance for the games we've made using DOM and CSS3</li>
                     </ul>
                 </aside>
             </section>
@@ -417,7 +410,8 @@
                       <li>hardware acceleration for CSS3 (most iOS, Android 3.0+)</li>
                       <li>smooth, fast (not blocked)</li>
                       <li>rendering not tied to intervals/timeouts (which are inconsistent)</li>
-                      <li>Sprite animations can be created using step-start transition timing</li>
+                      <li>Characters from Mighty Monsters (top down map)<br/>
+                        - Sprite animations (walk) created using step-start transition timing</li>
                       <li><strong>NOTE</strong> Hardware acceleration can be turned off, and performance generally degraded, as battery levels drop</li>
                     </ul>
                 </aside>
@@ -435,21 +429,17 @@
             <section>
               <h2>Another DOM Example</h2>
 
-<pre><code class="javascript">window.requestAnimFrame = (function(){
-  return  window.requestAnimationFrame       ||
-          window.webkitRequestAnimationFrame ||
-          window.mozRequestAnimationFrame    ||
-          function( callback ){
-            window.setTimeout(callback, 1000 / FPS);
-          };
-})();
-
-var game = new Game();
-
-(function animloop() {
+<pre><code class="javascript">(function animloop() {
   requestAnimFrame(animloop);
   game.update();
-})();</code></pre>
+})();
+
+Game.prototype.update = function() {
+  var currentTime = (new Date).getTime();
+  var delta = (currentTime - this.lastUpdate) / 1000;
+  this.lastUpdate = currentTime;
+  this.updater(delta);
+};</code></pre>
 
                 <aside class="notes">
                   <p>Further DOM example: Super Flappy Doge</p>
@@ -459,7 +449,154 @@ var game = new Game();
                 </aside>
             </section>
             <section>
-                <h2>Run Anywhere</h2>
+              <h2>Another DOM Example</h2>
+
+<pre><code class="javascript">Mover.prototype.update = function(delta) {
+  this.position.x += this.velocity.x * delta;
+  this.position.y += this.velocity.y * delta;
+  this.velocity.x += this.acceleration.x * delta;
+  this.velocity.y += this.acceleration.y * delta;
+
+  var transform = "translate3d(" +
+                  this.position.x * WIDTH_100 + "px," +
+                  this.position.y * HEIGHT_100 + "px, 0) " +
+                  "rotate(" + Math.atan2(this.velocity.y, ROTATION_LIMITER) + "rad)";
+  this.element.style.webkitTransform = transform;
+};</code></pre>
+
+                <aside class="notes">
+                </aside>
+            </section>
+            <section>
+              <h2>High Performance UI</h2>
+              <div style="text-align: left;">
+                <h3>3 Options:</h3>
+                <ul>
+                  <li>Store all UI (HTML, CSS, JavaScript) locally</li>
+                  <li>Use client side templating and data binding</li>
+                  <li>Cache all content and only refresh what's needed</li>
+                </ul>
+              </div>
+
+              <aside class="notes">
+                <ul>
+                <li>To compete with native games, need a UI that feels responsive</li>
+                <li>We've used all 3</li>
+                <li>Local: If doing an offline only game, bundle UI in app (or use application cache - WordSwap)</li>
+                <li>Data Binding: We've largely moved towards using AngularJS for new games</li>
+                <li>Cache Content: Approach taken on existing games</li>
+                <li>link prefetching generally not yet supported on mobile</li>
+                </ul>
+              </aside>
+            </section>
+            <section>
+              <h2>Caching Content</h2>
+
+<pre><code class="javascript">
+function LoadBody(url, targetId) {
+  var $currentArea = $(".content_area:visible");
+  var $target = $("#"+targetId);
+
+  if (target_id == $current_area.attr("id") || $target.is(":empty")) {
+    $.get(url, function( data, status, xhr ) {
+      LoadSuccess($target, data);
+    });
+  } else { LoadSuccess($target, ""); }
+}
+
+function LoadSuccess($target, data){
+  if (data) { $target.html(data); }
+  $(".content_area").hide();
+  $target.show();
+
+  //request to reload any potentially changed content
+}
+</code></pre>
+              <aside class="notes">
+                <ul>
+                  <li>Very basic approach</li>
+                  <li>Can extend with watch attributes that trigger a full refresh</li>
+                  <li>And with preloading pages, updating in the background (trade off data usage for performance)</li>
+                </ul>
+              </aside>
+            </section>
+            <section>
+                <h2>Image Preloading</h2>
+                <div style="text-align: left;">
+                    <h3>Problems:</h3>
+                    <ul>
+                        <li>
+                            <img src="assets/preloading/progscan.gif" style="float: right; margin: 0;" />
+                            Browsers load images with progressive image rendering
+                        </li>
+                        <div class="list-frag">
+                            <li>Mobile Caching isn't very good</li>
+                        </div>
+                        <div class="list-frag">
+                            <li>Sometimes browsers refuse to load images</li>
+                        </div>
+                    </ul>
+                </div>
+                <aside class="notes">
+
+
+                    <ul>
+                      <li>remote or large assets can be slow to render</li>
+                      <li>get image (or other asset) pop in</li>
+                      <li>Mostly images, but page rendering (or other assets: fonts) can also be a factor with multi-part page rendering</li>
+                    </ul>
+                    <ul>
+                        <li>iOS won’t render offscreen or "display: none;" images</li>
+                        <li>&lt;img&gt; tags will not be loaded, even if they’re visible, if the device is low on memory</li>
+                        <li>large images loaded in 1024x1024 chunks on iOS<br />
+                          - mighty map sprite example</li>
+                    </ul>
+
+
+                    http://www.codinghorror.com/blog/2005/12/progressive-image-rendering.html  - Jeff Atwood
+                    http://grinninggecko.com/developing-cross-platform-html5-offline-app-1/  (appcache limits)
+                </aside>
+            </section>
+            <section>
+                <h2>Image Preloading</h2>
+                <div style="text-align: left;">
+                    <h3>Solutions:</h3>
+                    <ul>
+                        <li>Write your own cache in the native client</li>
+                        <li>Use <em class="css-attr">background-image</em> not <em class="html">&lt;img&gt;</em></li>
+                        <li>Preload in a “visible” container, that has a low z-index</li>
+                    </ul>
+                    <pre><code class="css">
+  #preload {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      height: 1px;
+      width: 1px;
+      z-index: 0;
+  }
+
+</code></pre>
+
+                    <div class="note">
+                        Warning: background-image bypasses built in memmory limits on UIWebview.
+                    </div>
+                </div>
+                <aside class="notes">
+
+                    <ul>
+                        <li>gets around browser issues for image preloading</li>
+                        <li>A custom native client can cache images, and you can ship important images with your build</li>
+                        <li>Don't show the page until window.onload is fired.   Or use the iOS webViewDidFinishLoad() method.  Every browser is a bit different.</li>
+                    </ul>
+
+
+                    http://www.codinghorror.com/blog/2005/12/progressive-image-rendering.html  - Jeff Atwood
+                    http://grinninggecko.com/developing-cross-platform-html5-offline-app-1/  (prefetch limits)
+                </aside>
+            </section>
+            <section>
+                <h2>Browsers Everywhere</h2>
                 <ul>
                   <li><span style="color:green;">Pro:</span> <strong>Every modern device</strong> has a browser</li>
                   <li><span style="color:green;">Pro:</span> Almost all mobile browsers use WebKit</li>
@@ -469,7 +606,7 @@ var game = new Game();
 
                 <aside class="notes">
 
-                    <h4>LESSON: Multi-platform is easier, but not simple</h4>
+                    <h4>LESSON: Great reach for games, but hitting different platforms is more difficult then it should be</h4>
                     <p>Great thing, everything has a browser, generally WebKit (not always equal)</p>
                     <p>More recent Android issue: during CSS animations on *some* modern Android browsers (4.2+), elements would tile - fail to repaint previous element locations (like old windows errors)</p>
                     <p>Other odd bugs: BB10 - Most compliant HMTL5 browser when launched, drop downs didn't work!</p>
@@ -532,136 +669,6 @@ var game = new Game();
                       </ul>
                     </p>
                 </aside>
-            </section>
-            <section>
-                <h2>Image Preloading</h2>
-                <div style="text-align: left;">
-                    <h3>Problems:</h3>
-                    <ul>
-                        <li>
-                            <img src="assets/preloading/progscan.gif" style="float: right; margin: 0;" />
-                            Browsers load images with progressive image rendering
-                        </li>
-                        <div class="list-frag">
-                            <li>Mobile Caching isn't very good</li>
-                        </div>
-                        <div class="list-frag">
-                            <li>Sometimes browsers refuse to load images</li>
-                        </div>
-                    </ul>
-                </div>
-                <aside class="notes">
-
-
-                    <ul>
-                      <li>remote assets can be slow to render</li>
-                      <li>get image (or other asset) pop in</li>
-                      <li>Mostly images, but page rendering can also be a factor with multi-part page rendering</li>
-                    </ul>
-                    <ul>
-                        <li>Network time is the biggest delay. Especially over mobile networks, preloading is essential.</li>
-                        <li>Application Cache limited to 10mb</li>
-                        <li>link prefetching generally not yet supported on mobile</li>
-                    </ul>
-                    <ul>
-                        <li>iOS won’t render offscreen or "display: none;" images</li>
-                        <li>&lt;img&gt; tags will not be loaded, even if they’re visible, if the device is low on memory</li>
-                        <li>large images loaded in 1024x1024 chunks on iOS<br />
-                          - mighty map sprite example</li>
-                    </ul>
-
-
-                    http://www.codinghorror.com/blog/2005/12/progressive-image-rendering.html  - Jeff Atwood
-                    http://grinninggecko.com/developing-cross-platform-html5-offline-app-1/  (appcache limits)
-                </aside>
-            </section>
-            <section>
-                <h2>Image Preloading</h2>
-                <div style="text-align: left;">
-                    <h3>Solutions:</h3>
-                    <ul>
-                        <li>Write your own cache in the native client</li>
-                        <li>Use <em class="css-attr">background-image</em> not <em class="html">&lt;img&gt;</em></li>
-                        <li>Preload in a “visible” container, that has a low z-index</li>
-                    </ul>
-                    <pre><code class="css">
-  #preload {
-      position: absolute;
-      left: 0px;
-      top: 0px;
-      height: 1px;
-      width: 1px;
-      z-index: 0;
-  }
-
-</code></pre>
-
-                    <div class="note">
-                        Warning: background-image bypasses built in memmory limits on UIWebview.
-                    </div>
-                </div>
-                <aside class="notes">
-
-                    <ul>
-                        <li>gets around browser issues for image preloading</li>
-                        <li>A custom native client can cache images, and you can ship important images with your build</li>
-                        <li>Don't show the page until window.onload is fired.   Or use the iOS webViewDidFinishLoad() method.  Every browser is a bit different.</li>
-                    </ul>
-
-
-                    http://www.codinghorror.com/blog/2005/12/progressive-image-rendering.html  - Jeff Atwood
-                    http://grinninggecko.com/developing-cross-platform-html5-offline-app-1/  (prefetch limits)
-                </aside>
-            </section>
-            <section>
-              <h2>High Performance UI</h2>
-              <div style="text-align: left;">
-                <h3>3 Options:</h3>
-                <ul>
-                  <li>Store all UI (HTML, CSS, JavaScript) locally</li>
-                  <li>Use client side templating and data binding</li>
-                  <li>Cache all content and only refresh what's needed</li>
-                </ul>
-              </div>
-
-              <aside class="notes">
-                <p>To compete with native games, need a UI that feels responsive</p>
-                <p>We've used all 3</p>
-                <p>If doing an offline only game, bundle UI in app (or use application cache - WordSwap)</p>
-                <p>We've largely moved towards using AngularJS for new games</p>
-                <p>Approach taken on existing games</p>
-              </aside>
-            </section>
-            <section>
-              <h2>Caching Content</h2>
-
-<pre><code class="javascript">
-function LoadBody(url, targetId) {
-  var $currentArea = $(".content_area:visible");
-  var $target = $("#"+targetId);
-
-  if (target_id == $current_area.attr("id") || $target.is(":empty")) {
-    $.get(url, function( data, status, xhr ) {
-      LoadSuccess($target, data);
-    });
-  } else { LoadSuccess($target, ""); }
-}
-
-function LoadSuccess($target, data){
-  if (data) { $target.html(data); }
-  $(".content_area").hide();
-  $target.show();
-
-  //request to reload any potentially changed content
-}
-</code></pre>
-              <aside class="notes">
-                <ul>
-                  <p>Very basic approach</p>
-                  <p>Can extend with watch attributes that trigger a full refresh</p>
-                  <p>And with preloading pages, updating in the background (trade off data usage for performance)</p>
-                </ul>
-              </aside>
             </section>
             <!--
             <section>
@@ -811,12 +818,16 @@ end
                   <div class="left">
                     Owen Lawson<br />
                     <a href="mailto:owen@uken.com?Subject=PAX%20Talk" class="roll">owen@uken.com</a><br />
-                    @OwenCPL</div>
+                    @OwenCPL
+                  </div>
                   <div class="right">
                     Special Thanks:<br />
                     Adam Proctor<br />
-                    Justin Vanderheide</div>
+                    Simon Brooks<br />
+                    Justin Vanderheide
+                  </div>
                 </div>
+                <div class="footnote">Reveal.js (https://github.com/hakimel/reveal.js)</div>
             </section>
       </div>
 
